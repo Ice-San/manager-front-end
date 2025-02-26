@@ -2,8 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router';
 
-import { SignIn } from './pages/signin';
-import { SignUp } from './pages/signup';
+import { SignIn } from './pages/auth/signin';
+import { SignUp } from './pages/auth/signup';
 
 import './styles/index.css';
 
