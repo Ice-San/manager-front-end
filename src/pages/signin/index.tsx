@@ -76,7 +76,7 @@ export const SignInPage = () => {
 
                             <div className="submit-btn">
                                 <input type="submit" value="Sign In" />
-                                <p>Don't have a account? <Link to="/signup">SignUp!</Link></p>
+                                <p>Don't have a account? <Link to="/">SignUp!</Link></p>
                             </div>
                         </form>
                     </div>
