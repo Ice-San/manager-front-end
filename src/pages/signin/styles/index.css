@@ -1,134 +1,75 @@
 .background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 100%;
     height: 100vh;
 }
 
-.background-container {
-    background-image: url("../../../assets/img/background.png");
-}
-
-.overlay {
-    background-color: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(75px);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 100%;
-    height: 100%;
-}
-
 .auth-box {
-    background-color: rgb(255, 255, 255, 0.45);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 1vw;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 12px;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 1px 3px 0 #0000001a,0 1px 2px -1px #0000001a;
 
-    width: 45%;
-    min-width: 350px;
+    padding: 24px;
+
+    width: auto;
     height: auto;
 }
 
-.logo-size {
+.auth-box-title > p {
+    color: #707070;
+    font-size: 14px;
 
-    width: 15vw;
-    height: 15vw;
-}
-
-.logo-img {
-    background-image: url("../../../assets/img/auth-logo.png");
-}
-
-.auth-box form {
-    display: flex;
-    flex-direction: column;
-
-    width: 35vw;
-    height: auto;
-
-    padding: 0 1.5vw;
-    padding-bottom: 1.5vw;
-
-    width: 100%;
+    margin-top: 5px;
 }
 
 .label {
-    display: flex;
-    align-items: center;
-    grid-gap: 0.6vw;
-
-    margin-bottom: 1vw;
+    margin-top: 15px;
 }
 
-.label p {
-    font-size: 2.8vw;
+.label > h2 {
+    font-size: 14px;
+    margin-bottom: 5px;
 }
 
-.icons-size {
-    width: 2.8vw;
-    height: 2.8vw;
-}
+.auth-box > form > input {
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 6px;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 1px 3px 0 #0000001a,0 1px 2px -1px #0000001a;
 
-.email-icon {
-    background-image: url("../../../assets/img/email-icon.png");
-}
+    padding: 8px 12px;
 
-.username-icon {
-    background-image: url("../../../assets/img/username-icon.png");
-}
+    font-size: 14px;
 
-.password-icon {
-    background-image: url("../../../assets/img/password-icon.png");
-}
-
-.inputs {
-    background-color: rgb(255, 255, 255, 0.35);
-
-    font-size: 1.8vw;
-    border: 2px solid rgba(0, 0, 0, 0.75);
-    border-radius: 0.5vw;
-
-    margin-bottom: 1.1vw;
-    padding: 0.7vw 0.5vw;
+    width: 100%;
 }
 
 .submit-btn {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    grid-gap: 0.8vw;
+    background-color: #171717;
+    border-radius: 8px;
 
-    margin-top: 1vw;
+    margin-top: 15px;
+
+    width: 100%;
+    height: auto;
+
+    transition: all 0.3s ease-in-out;
 }
 
-.submit-btn input {
-    background-color: rgb(255, 255, 255, 0.35);
-    
-    font-size: 2.8vw;
-    border-radius: 0.5vw;
+.submit-btn:hover {
+    background-color: #232323;
+}
+
+.submit-btn > input {
+    color: #fafafa;
+    font-weight: 600;
 
     cursor: pointer;
 
-    padding: 0.8vw 0;
+    padding: 10px 16px;
 
     width: 100%;
-    height: 100%;
-
-    transition: all ease-in-out 0.3s;
-}
-
-.submit-btn input:hover {
-    transform: scale(0.95);
-}
-
-.submit-btn p {
-    font-size: 1.5vw;
-    cursor: default;
+    height: auto;
 }

@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import './styles/index.css';
 import './styles/media-querys.css';
 
-import { IconsContainer } from '@assets/components/img-container';
 import { useEffect } from 'react';
 
 type FormData = {
@@ -55,32 +54,27 @@ export const SignInPage = () => {
 
     return (
         <div className="background">
-            <div className="background-container divs-container">
-                <div className="overlay">
-                    <div className="auth-box">
-                        <IconsContainer imgSize="logo-size" imgUrl="logo-img" />
-
-                        <form onSubmit={onSubmit}>
-                            <div className="label">
-                                <IconsContainer imgSize="icons-size" imgUrl="email-icon" />
-                                <p>Email</p>
-                            </div>
-
-                            <input {...register('email', { required: 'It seems you dont\' put an email :( ', pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i, maxLength: 100 })} className='inputs' type="email" placeholder='userTest@gmail.com' />
-
-                            <div className="label">
-                                <IconsContainer imgSize="icons-size" imgUrl="password-icon" />
-                                <p>Password</p>
-                            </div>
-                            <input {...register('password', { required: 'It seems you dont\' put an password', maxLength: 100 })} className='inputs' type="password" placeholder='****' />
-
-                            <div className="submit-btn">
-                                <input type="submit" value="Sign In" />
-                                <p>Don't have a account? <Link to="/">SignUp!</Link></p>
-                            </div>
-                        </form>
-                    </div>
+            <div className="auth-box">
+                <div className="auth-box-title">
+                    <h1>Login to your account</h1>
+                    <p>Enter your email below to login to your account</p>
                 </div>
+
+                <form onSubmit={onSubmit}>
+                    <div className="label">
+                        <h2>Email</h2>
+                    </div>
+                    <input {...register('email', { required: 'It seems you dont\' put an email :( ', pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i, maxLength: 100 })} className='inputs' type="email" placeholder='m@example.com' />
+
+                    <div className="label">
+                        <h2>Password</h2>
+                    </div>
+                    <input {...register('password', { required: 'It seems you dont\' put an password', maxLength: 100 })} className='inputs' type="password" placeholder='' />
+
+                    <div className="submit-btn">
+                        <input type="submit" value="Login" />
+                    </div>
+                </form>
             </div>
         </div>
     );
