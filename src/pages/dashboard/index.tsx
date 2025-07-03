@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
-export const AccountPage = () => {
+export const DashboardPage = () => {
     const navegate = useNavigate();
     useEffect(() => {
         const userId = localStorage.getItem('userId');
 
         if(!userId) {
-            navegate('/signin');
+            navegate('/');
         }
     },[]);
 
