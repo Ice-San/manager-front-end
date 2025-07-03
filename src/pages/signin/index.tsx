@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './styles/index.css';
 import './styles/media-querys.css';
@@ -15,7 +16,9 @@ export const SignInPage = () => {
     const { register, handleSubmit } = useForm<FormData>();
     const navegate = useNavigate();
 
-    const onSubmit = handleSubmit(async dataForm => { 
+    const onSubmit = handleSubmit(async dataForm => {
+        toast("Your Login was a success!");
+
         try {
             const response = await fetch('http://localhost:5005/auth', {
                 method: "POST",
@@ -76,6 +79,19 @@ export const SignInPage = () => {
                     </div>
                 </form>
             </div>
+
+            <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 }
