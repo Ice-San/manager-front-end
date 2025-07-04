@@ -6,6 +6,8 @@ import './styles/media-querys.css';
 
 import { useEffect } from 'react';
 
+const { VITE_API_ENDPOINT } = import.meta.env;
+
 type FormData = {
     email: string,
     password: string
@@ -17,7 +19,7 @@ export const SignInPage = () => {
 
     const onSubmit = handleSubmit(async dataForm => { 
         try {
-            const response = await fetch('http://localhost:5005/auth', {
+            const response = await fetch(`${VITE_API_ENDPOINT}/auth`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -25,19 +27,19 @@ export const SignInPage = () => {
                 body: JSON.stringify(dataForm)
             });
             const { data, status } = await response.json();
-            const { success, userId } = data;
+            const { success, token } = data;
     
             if(status !== 200 || success !== true) {
                 console.error("Authentication was a failed...");
                 return;
             }
 
-            if(!userId) {
+            if(!token) {
                 console.error("User not exist!");
                 return;
             }
             
-            localStorage.setItem("userId", userId);
+            localStorage.setItem("token", token);
             navegate("/account");
         } catch (err) {
             console.error("Something went wrong: ", err);
@@ -45,9 +47,9 @@ export const SignInPage = () => {
     });
 
     useEffect(() => {
-        const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
 
-        if(userId) {
+        if(token) {
             navegate('/account');
         }
     }, []);

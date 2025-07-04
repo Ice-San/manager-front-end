@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { validation } from "helpers/validation";
 
 export const DashboardPage = () => {
     const navegate = useNavigate();
-    useEffect(() => {
-        const userId = localStorage.getItem('userId');
 
-        if(!userId) {
-            navegate('/');
-        }
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        (async () => {
+            const auth = await validation(token as string);
+            if(!auth) navegate('/');
+        })();
     },[]);
 
     return (
