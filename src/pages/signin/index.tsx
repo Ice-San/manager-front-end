@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 
-import './styles/index.css';
+import './index.css';
 
 import { useEffect } from 'react';
 

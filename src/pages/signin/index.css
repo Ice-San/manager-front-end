@@ -53,9 +53,10 @@
 }
 
 .input > input {
+    outline: 3px solid transparent;
     border: 1px solid rgb(229, 229, 229);
     border-radius: 8px;
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 1px 3px 0 #0000001a,0 1px 2px -1px #0000001a;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 1px 1px 0 #0000001a,0 1px 2px -1px #0000001a;
 
     padding: 8px 12px;
 
@@ -67,7 +68,8 @@
 }
 
 .input > input:focus-visible {
-    border: 3px solid color-mix(in oklab,#a1a1a1 50%, transparent);
+    outline: 3px solid color-mix(in oklab,#a1a1a1 50%, transparent);
+    border: 1px solid rgb(165, 165, 165);
 }
 
 .submit-btn {
