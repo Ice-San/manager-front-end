@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 
 import './styles/index.css';
@@ -63,15 +63,21 @@ export const SignInPage = () => {
                 </div>
 
                 <form onSubmit={onSubmit}>
-                    <div className="label">
-                        <h2>Email</h2>
-                    </div>
-                    <input {...register('email', { required: 'It seems you dont\' put an email :( ', pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i, maxLength: 100 })} className='inputs' type="email" placeholder='m@example.com' />
+                    <div className="inputs-spacing">
+                        <div className="input">
+                            <div className="label">
+                                <h2>Email</h2>
+                            </div>
+                            <input {...register('email', { required: 'It seems you dont\' put an email :( ', pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i, maxLength: 100 })} className='inputs' type="email" placeholder='m@example.com' />
+                        </div>
 
-                    <div className="label">
-                        <h2>Password</h2>
+                        <div className="input">
+                            <div className="label">
+                                <h2>Password</h2>
+                            </div>
+                            <input {...register('password', { required: 'It seems you dont\' put an password', maxLength: 100 })} className='inputs' type="password" placeholder='' />
+                        </div>
                     </div>
-                    <input {...register('password', { required: 'It seems you dont\' put an password', maxLength: 100 })} className='inputs' type="password" placeholder='' />
 
                     <div className="submit-btn">
                         <input type="submit" value="Login" />
