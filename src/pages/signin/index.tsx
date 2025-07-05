@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 
 import './styles/index.css';
-import './styles/media-querys.css';
 
 import { useEffect } from 'react';
 
