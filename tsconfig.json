@@ -16,7 +16,8 @@
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
       "@hooks/*": ["hooks/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@helpers/*": ["helpers/*"]
     }
   },
   "include": ["src"],

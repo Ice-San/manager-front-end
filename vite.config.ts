@@ -1,13 +1,7 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
-import { fileURLToPath } from 'url'
-import { dirname, resolve } from 'path'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   server: {
@@ -15,10 +9,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@assets': resolve(__dirname, './src/assets'),
-      '@components': resolve(__dirname, './src/components'),
-      '@utils': resolve(__dirname, './src/utils'),
-      '@hooks': resolve(__dirname, './src/hooks')
-    }
-  }
-})
+      "@assets": "/src/assets",
+      "@components": "/src/components",
+      "@utils": "/src/utils",
+      "@hooks": "/src/hooks",
+      "@helpers": "/src/helpers",
+    },
+  },
+});

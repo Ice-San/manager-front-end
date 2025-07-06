@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { validation } from "helpers/validation";
+import { validation } from "@helpers/validation";
 
 export const DashboardPage = () => {
     const navegate = useNavigate();
