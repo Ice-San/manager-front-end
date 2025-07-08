@@ -18,7 +18,7 @@ export const SignInPage = () => {
 
     const onSubmit = handleSubmit(async dataForm => { 
         try {
-            const response = await fetch(`${VITE_API_ENDPOINT}/auth`, {
+            const response = await fetch(`${VITE_API_ENDPOINT}/auth/signin`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -38,7 +38,7 @@ export const SignInPage = () => {
                 return;
             }
             
-            localStorage.setItem("token", token);
+            document.cookie = `token=${token};`;
             navegate("/account");
         } catch (err) {
             console.error("Something went wrong: ", err);
@@ -46,7 +46,8 @@ export const SignInPage = () => {
     });
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const decodedToken = decodeURIComponent(document.cookie);
+        const token = decodedToken.substring(6).split(";")[0];
 
         if(token) {
             navegate('/account');

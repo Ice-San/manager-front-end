@@ -6,7 +6,8 @@ export const DashboardPage = () => {
     const navegate = useNavigate();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const decodedToken = decodeURIComponent(document.cookie);
+        const token = decodedToken.substring(6).split(";")[0];
 
         (async () => {
             const auth = await validation(token as string);
