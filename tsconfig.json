@@ -10,7 +10,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx", 
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["components/*"],
