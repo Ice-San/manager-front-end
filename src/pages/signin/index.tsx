@@ -1,10 +1,10 @@
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 
 import './index.css';
-
-import { useEffect } from 'react';
 
 const { VITE_API_ENDPOINT } = import.meta.env;
 
@@ -16,6 +16,8 @@ type FormData = {
 export const SignInPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
     const navegate = useNavigate();
+
+    const [cookies, setCookie] = useCookies(['token']);
 
     const onSubmit = async (dataForm: FormData) => {
         console.log(dataForm);
@@ -57,7 +59,7 @@ export const SignInPage = () => {
                 draggable: 'touch'
             });
             
-            document.cookie = `token=${token};`;
+            setCookie('token', token);
             navegate("/account");
         } catch (err) {
             console.error("Something went wrong: ", err);
@@ -76,8 +78,7 @@ export const SignInPage = () => {
     }
 
     useEffect(() => {
-        const decodedToken = decodeURIComponent(document.cookie);
-        const token = decodedToken.substring(6).split(";")[0];
+        const token = cookies?.token;
 
         if(token) {
             navegate('/account');

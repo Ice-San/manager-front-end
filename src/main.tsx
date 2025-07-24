@@ -1,19 +1,15 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router';
 
-import { SignInPage } from './pages/signin';
-import { DashboardPage } from './pages/dashboard';
+import { Providers } from './providers';
+import { Routes } from './routes'
 
 import './styles/index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<SignInPage />} />
-        <Route path='/account' element={<DashboardPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Providers>
+      <Routes />
+    </Providers>
   </StrictMode>,
 );

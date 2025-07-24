@@ -1,13 +1,14 @@
 import { useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
 import { validation } from "@helpers/validation";
 
 export const DashboardPage = () => {
     const navegate = useNavigate();
+    const [cookies] = useCookies(['token']);
 
     useEffect(() => {
-        const decodedToken = decodeURIComponent(document.cookie);
-        const token = decodedToken.substring(6).split(";")[0];
+        const token = cookies?.token;
 
         (async () => {
             const auth = await validation(token as string);
