@@ -8,7 +8,8 @@ import { UserItems } from "@assets/components/UserItem";
 import { DashboardStats } from "@assets/components/DashboardStats";
 
 import '@styles/index.css';
-import './index.css';
+import './styles/index.css';
+import './styles/media-querys.css';
 
 export const DashboardPage = () => {
     const navegate = useNavigate();
@@ -47,6 +48,29 @@ export const DashboardPage = () => {
         }
     ];
 
+    const statsItems = [
+        {
+            icon: "dashboard-total-icon",
+            title: "Total Users",
+            value: "3"
+        },
+        {
+            icon: "",
+            title: "Admins",
+            value: "1"
+        },
+        {
+            icon: "",
+            title: "Moderators",
+            value: "1"
+        },
+        {
+            icon: "",
+            title: "Users",
+            value: "1"
+        }
+    ]
+
     return (
         <div className="dashboard">
             <div className="dashboard-title">
@@ -57,64 +81,88 @@ export const DashboardPage = () => {
             <div className="dashboard-users">
                 <div className="dashboard-add">
                     <div className="dashboard-add-title">
-                        <IconsContainer imgSize="dashboard-add-icon" imgUrl="dashboard-add-container" />
-                        <h2>Add New User</h2>
+                        <div className="dashboard-add-title-top">
+                            <IconsContainer imgSize="dashboard-add-icon" imgUrl="dashboard-add-container" />
+                            <h2>Add New User</h2>
+                        </div>
+
+                        <div className="dashboard-add-title-bottom">
+                            Fill in the details to add a new user to the system.
+                        </div>
                     </div>
-                    
-                    <p>Fill in the details to add a new user to the system.</p>
 
                     <div className="dashboard-add-form">
-                        <h2>Full Name</h2>
-                        <input type="text" placeholder="Enter full name" />
+                        <form action="">
+                            <div className="dashboard-add-form-inputs">
+                                <label>Full Name</label>
+                                <input type="text" placeholder="Enter full name" />
+                            </div>
 
-                        <h2>Email Address</h2>
-                        <input type="text" placeholder="Enter email address" />
+                            <div className="dashboard-add-form-inputs">
+                                <label>Email Address</label>
+                                <input type="text" placeholder="Enter email address" />
+                            </div>
 
-                        <h2>Role</h2>
-                        <select>
-                            <option>User</option>
-                            <option>Moderator</option>
-                            <option>Admin</option>
-                        </select>
+                            <div className="dashboard-add-form-inputs">
+                                <label>Role</label>
+                                <select>
+                                    <option>User</option>
+                                    <option>Moderator</option>
+                                    <option>Admin</option>
+                                </select>
+                            </div>
 
-                        <div className="dashboard-add-btn">
-                            <IconsContainer imgSize="dashboard-add-icon" imgUrl="dashboard-add-container" />
-                            <h2>Add User</h2>
-                        </div>
+                            <button className="dashboard-add-btn">
+                                <IconsContainer imgSize="dashboard-add-icon-btn" imgUrl="dashboard-add-container-btn" />
+                                Add User
+                            </button>
+                        </form>
                     </div>
                 </div>
 
                 <div className="dashboard-list">
                     <div className="dashboard-list-title">
-                        <IconsContainer imgSize="dashboard-list-icon" imgUrl="dashboard-list-container" />
-                        <h2>User List (3)</h2>
+                        <div className="dashboard-list-title-top">
+                            <IconsContainer imgSize="dashboard-list-icon" imgUrl="dashboard-list-container" />
+                            <h2>User List (3)</h2>
+                        </div>
+                    
+                        <div className="dashboard-list-title-bottom">
+                            Search and manage existing users in the system.
+                        </div>
                     </div>
 
-                    <p>Search and manage existing users in the system.</p>
+                    <div className="dashboard-list-content">
+                        <div className="dashboard-list-searchbar">
+                            <IconsContainer imgSize="dashboard-list-searchbar-icon" imgUrl="dashboard-list-searchbar-container" />
+                            <input type="text" placeholder="Search users by name, email or role..." />
+                        </div>
 
-                    <div className="dashboard-list-searchbar">
-                        <IconsContainer imgSize="dashboard-list-searchbar-icon" imgUrl="dashboard-list-searchbar-container" />
-                        <input type="text" placeholder="Search users by name, email or role..." />
+                        <div className="dashboard-list-users">
+                            {userItems.map((userItem, index) => (
+                                <UserItems
+                                    key={index}
+                                    username={userItem.username}
+                                    role={userItem.role}
+                                    state={userItem.state}
+                                    email={userItem.email}
+                                    joined={userItem.joined}
+                                />
+                            ))}
+                        </div>
                     </div>
-
-                    {userItems.map((userItem, index) => (
-                        <UserItems
-                            key={index}
-                            username={userItem.username}
-                            role={userItem.role}
-                            state={userItem.state}
-                            email={userItem.email}
-                            joined={userItem.joined}
-                        />
-                    ))}
                 </div>
             </div>
 
             <div className="dashboard-stats">
-                <DashboardStats icon="dashboard-total-icon" title="Total Users" value="3" />
-                <DashboardStats icon="dashboard-admin-icon" title="Admins" value="1" />
-                <DashboardStats icon="dashboard-user-icon" title="User" value="1" />
-                <DashboardStats icon="dashboard-moderator-icon" title="Moderator" value="1" />
+                {statsItems.map((statsItem, index) => (
+                    <DashboardStats
+                        key={index}
+                        icon={statsItem.icon}
+                        title={statsItem.title}
+                        value={statsItem.value}
+                    />
+                ))}
             </div>
         </div>
     )

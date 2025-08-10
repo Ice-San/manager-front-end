@@ -1,0 +1,51 @@
+@media (max-width: 80rem) {
+    .dashboard {
+        max-width: 80rem;
+    }
+}
+
+@media (max-width: 64rem) {
+    .dashboard {
+        max-width: 64rem;
+    }
+}
+
+@media (max-width: 48rem) {
+    .dashboard {
+        max-width: 48rem;
+    }
+
+    .dashboard-add-form-inputs > input {
+        font-size: .875rem;
+        line-height: calc(1.25 / .875);
+    }
+}
+
+@media (min-width: 48rem) {
+    .dashboard-list-searchbar > input {
+        font-size: .875rem;
+        line-height: calc(1.25 / .875rem);
+    }
+}
+
+@media (max-width: 40rem) {
+    .dashboard {
+        max-width: 40rem;
+    }
+}
+
+@media (max-width: 1023px) {
+    .dashboard-users {
+        flex-direction: column;
+    }
+
+    .dashboard-add {
+        width: 100%;
+    }
+}
+
+@media (max-width:768px) {
+    .dashboard-stats {
+        flex-direction: column;
+    }
+}
