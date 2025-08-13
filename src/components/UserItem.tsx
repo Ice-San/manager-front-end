@@ -21,8 +21,8 @@ export const UserItems = ({username, role, state, email, joined}: UserItemsType)
                     <div className="dashboard-list-item-info">
                         <div className="dashboard-list-item-bottom">
                             <h2>{username}</h2>
-                            <p data-role={role}>{role}</p>
-                            <p data-state={state}>{state}</p>
+                            <p data-role={role.toCapitalize()}>{role.toCapitalize()}</p>
+                            <p data-state={state.toCapitalize()}>{state.toCapitalize()}</p>
                         </div>
 
                         <p>{email}</p>

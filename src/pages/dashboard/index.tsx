@@ -99,8 +99,6 @@ export const DashboardPage = () => {
                                 <UserItems
                                     key={index}
                                     {...user}
-                                    role={user.role.toCapitalize()}
-                                    state={user.state.toCapitalize()}
                                 />
                             ))}
                         </div>
