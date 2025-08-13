@@ -3,9 +3,9 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
 import { validation } from "@utils/validation";
 
-import { Icon } from "@assets/components/Icon";
-import { UserItems } from "@assets/components/UserItem";
-import { DashboardStats } from "@assets/components/DashboardStats";
+import { Icon } from "@components/Icon";
+import { UserItems } from "@components/UserItem";
+import { DashboardStats } from "@components/DashboardStats";
 
 import '@styles/index.css';
 import './styles/index.css';
@@ -15,6 +15,30 @@ import addUserBlack from '@assets/img/add-user-black.png';
 import addUserWhite from '@assets/img/add-user-white.png';
 import userListBlack from '@assets/img/user-list-black.png';
 import searchIcon from '@assets/img/search-icon.png';
+
+const userItems = [
+    {
+        username: "John Doe",
+        role: "Admin",
+        state: "Active",
+        email: "john.doe@example.com",
+        joined: "1/15/2024"
+    },
+    {
+        username: "Jane Smith",
+        role: "User",
+        state: "Active",
+        email: "jane.smith@example.com",
+        joined: "2/20/2024"
+    },
+    {
+        username: "Mike Johnson",
+        role: "Moderator",
+        state: "Inactive",
+        email: "mike.johnson@example.com",
+        joined: "3/10/2024"
+    }
+];
 
 export const DashboardPage = () => {
     const navegate = useNavigate();
@@ -28,53 +52,6 @@ export const DashboardPage = () => {
             if(!auth) navegate('/');
         })();
     },[]);
-
-    const userItems = [
-        {
-            username: "John Doe",
-            role: "Admin",
-            state: "Active",
-            email: "john.doe@example.com",
-            joined: "1/15/2024"
-        },
-        {
-            username: "Jane Smith",
-            role: "User",
-            state: "Active",
-            email: "jane.smith@example.com",
-            joined: "2/20/2024"
-        },
-        {
-            username: "Mike Johnson",
-            role: "Moderator",
-            state: "Inactive",
-            email: "mike.johnson@example.com",
-            joined: "3/10/2024"
-        }
-    ];
-
-    const statsItems = [
-        {
-            icon: "dashboard-total-icon",
-            title: "Total Users",
-            value: "3"
-        },
-        {
-            icon: "",
-            title: "Admins",
-            value: "1"
-        },
-        {
-            icon: "",
-            title: "Moderators",
-            value: "1"
-        },
-        {
-            icon: "",
-            title: "Users",
-            value: "1"
-        }
-    ]
 
     return (
         <div className="dashboard">
@@ -156,14 +133,26 @@ export const DashboardPage = () => {
             </div>
 
             <div className="dashboard-stats">
-                {statsItems.map(({ icon, title, value }, index) => (
-                    <DashboardStats
-                        key={index}
-                        icon={icon}
-                        title={title}
-                        value={value}
-                    />
-                ))}
+                <DashboardStats 
+                    icon='dashboard-total-icon'
+                    title='Total Users'
+                    value='3'
+                />
+                <DashboardStats 
+                    icon=''
+                    title='Admins'
+                    value='1'
+                />
+                <DashboardStats 
+                    icon=''
+                    title='Moderators'
+                    value='1'
+                />
+                <DashboardStats 
+                    icon=''
+                    title='Users'
+                    value='1'
+                />
             </div>
         </div>
     )
