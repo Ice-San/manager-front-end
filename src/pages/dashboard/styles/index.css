@@ -66,10 +66,6 @@
     height: calc(.25rem * 5);
 }
 
-.dashboard-add-container {
-    background-image: url("../../../assets/img/add-user-black.png");
-}
-
 .dashboard-add-title-bottom {
     color: oklab(55.6% 0 0);
     font-size: .875rem;
@@ -183,10 +179,6 @@
     height: calc(.25rem * 4);
 }
 
-.dashboard-add-container-btn {
-    background-image: url("../../../assets/img/add-user-white.png");
-}
-
 .dashboard-list {
     background-color: oklab(100% 0 0);
     border: oklab(92.2% 0 0) solid 1px;
@@ -227,10 +219,6 @@
     height: calc(.25rem * 5);
 }
 
-.dashboard-list-container {
-    background-image: url("../../../assets/img/user-list-black.png");
-}
-
 .dashboard-list-title-bottom {
     color: oklab(55.6% 0 0);
     font-size: .875rem;
@@ -262,10 +250,6 @@
 
     width: calc(.25rem * 4);
     height: calc(.25rem * 4);
-}
-
-.dashboard-list-searchbar-container {
-    background-image: url("../../../assets/img/search-icon.png");
 }
 
 .dashboard-list-searchbar > input {
@@ -466,10 +450,6 @@
     height: calc(.25rem * 4);
 }
 
-.dashboard-list-item-delete-container {
-    background-image: url("../../../assets/img/delete.png");
-}
-
 .dashboard-stats {
     display: flex;
     gap: calc(.25rem * 4);
@@ -547,10 +527,6 @@
 
     width: calc(.25rem * 5);
     height: calc(.25rem * 5);
-}
-
-.dashboard-stats-container {
-    background-image: url("../../../assets/img/user-list-blue.png");
 }
 
 .dashboard-stats-title-content > h2 {

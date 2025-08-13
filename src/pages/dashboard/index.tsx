@@ -1,15 +1,20 @@
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
-import { validation } from "@helpers/validation";
+import { validation } from "@utils/validation";
 
-import { IconsContainer } from "@assets/components/IconContainer";
+import { Icon } from "@assets/components/Icon";
 import { UserItems } from "@assets/components/UserItem";
 import { DashboardStats } from "@assets/components/DashboardStats";
 
 import '@styles/index.css';
 import './styles/index.css';
 import './styles/media-querys.css';
+
+import addUserBlack from '@assets/img/add-user-black.png';
+import addUserWhite from '@assets/img/add-user-white.png';
+import userListBlack from '@assets/img/user-list-black.png';
+import searchIcon from '@assets/img/search-icon.png';
 
 export const DashboardPage = () => {
     const navegate = useNavigate();
@@ -82,7 +87,7 @@ export const DashboardPage = () => {
                 <div className="dashboard-add">
                     <div className="dashboard-add-title">
                         <div className="dashboard-add-title-top">
-                            <IconsContainer imgSize="dashboard-add-icon" imgUrl="dashboard-add-container" />
+                            <Icon className="dashboard-add-icon" url={addUserBlack} />
                             <h2>Add New User</h2>
                         </div>
 
@@ -113,7 +118,7 @@ export const DashboardPage = () => {
                             </div>
 
                             <button className="dashboard-add-btn">
-                                <IconsContainer imgSize="dashboard-add-icon-btn" imgUrl="dashboard-add-container-btn" />
+                                <Icon className="dashboard-add-icon-btn" url={addUserWhite} />
                                 Add User
                             </button>
                         </form>
@@ -123,7 +128,7 @@ export const DashboardPage = () => {
                 <div className="dashboard-list">
                     <div className="dashboard-list-title">
                         <div className="dashboard-list-title-top">
-                            <IconsContainer imgSize="dashboard-list-icon" imgUrl="dashboard-list-container" />
+                            <Icon className="dashboard-list-icon" url={userListBlack} />
                             <h2>User List (3)</h2>
                         </div>
                     
@@ -134,19 +139,15 @@ export const DashboardPage = () => {
 
                     <div className="dashboard-list-content">
                         <div className="dashboard-list-searchbar">
-                            <IconsContainer imgSize="dashboard-list-searchbar-icon" imgUrl="dashboard-list-searchbar-container" />
+                            <Icon className="dashboard-list-searchbar-icon" url={searchIcon} />
                             <input type="text" placeholder="Search users by name, email or role..." />
                         </div>
 
                         <div className="dashboard-list-users">
-                            {userItems.map((userItem, index) => (
+                            {userItems.map((user, index) => (
                                 <UserItems
                                     key={index}
-                                    username={userItem.username}
-                                    role={userItem.role}
-                                    state={userItem.state}
-                                    email={userItem.email}
-                                    joined={userItem.joined}
+                                    {...user}
                                 />
                             ))}
                         </div>
@@ -155,12 +156,12 @@ export const DashboardPage = () => {
             </div>
 
             <div className="dashboard-stats">
-                {statsItems.map((statsItem, index) => (
+                {statsItems.map(({ icon, title, value }, index) => (
                     <DashboardStats
                         key={index}
-                        icon={statsItem.icon}
-                        title={statsItem.title}
-                        value={statsItem.value}
+                        icon={icon}
+                        title={title}
+                        value={value}
                     />
                 ))}
             </div>

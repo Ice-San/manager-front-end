@@ -1,4 +1,5 @@
-import { IconsContainer } from "../IconContainer";
+import { Icon } from "./Icon";
+import userListBlue from '@assets/img/user-list-blue.png';
 
 type DashboardStatsType = {
     icon: string,
@@ -11,7 +12,7 @@ export const DashboardStats = ({icon, title, value}: DashboardStatsType) => {
         <>
             <div className="dashboard-stats-item">
                 <div className="dashboard-stats-title">
-                    {icon ? <IconsContainer imgSize={icon} imgUrl="dashboard-stats-container" /> : <span data-role={title}>{title.charAt(0)}</span>}
+                    {icon ? <Icon className={icon} url={userListBlue} /> : <span data-role={title}>{title.charAt(0)}</span>}
 
                     <div className="dashboard-stats-title-content">
                         <h2>{title}</h2>
