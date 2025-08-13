@@ -4,7 +4,7 @@ import userListBlue from '@assets/img/user-list-blue.png';
 type DashboardStatsType = {
     icon: string,
     title: string,
-    value: string
+    value: string | number
 }
 
 export const DashboardStats = ({icon, title, value}: DashboardStatsType) => {

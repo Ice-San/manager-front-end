@@ -16,29 +16,8 @@ import addUserWhite from '@assets/img/add-user-white.png';
 import userListBlack from '@assets/img/user-list-black.png';
 import searchIcon from '@assets/img/search-icon.png';
 
-const userItems = [
-    {
-        username: "John Doe",
-        role: "Admin",
-        state: "Active",
-        email: "john.doe@example.com",
-        joined: "1/15/2024"
-    },
-    {
-        username: "Jane Smith",
-        role: "User",
-        state: "Active",
-        email: "jane.smith@example.com",
-        joined: "2/20/2024"
-    },
-    {
-        username: "Mike Johnson",
-        role: "Moderator",
-        state: "Inactive",
-        email: "mike.johnson@example.com",
-        joined: "3/10/2024"
-    }
-];
+import users from '@data/users.json';
+import stats from '@data/stats.json';
 
 export const DashboardPage = () => {
     const navegate = useNavigate();
@@ -121,7 +100,7 @@ export const DashboardPage = () => {
                         </div>
 
                         <div className="dashboard-list-users">
-                            {userItems.map((user, index) => (
+                            {users.map((user, index) => (
                                 <UserItems
                                     key={index}
                                     {...user}
@@ -136,22 +115,22 @@ export const DashboardPage = () => {
                 <DashboardStats 
                     icon='dashboard-total-icon'
                     title='Total Users'
-                    value='3'
+                    value={stats[0].totalUsers}
                 />
                 <DashboardStats 
                     icon=''
                     title='Admins'
-                    value='1'
+                    value={stats[0].admins}
                 />
                 <DashboardStats 
                     icon=''
                     title='Moderators'
-                    value='1'
+                    value={stats[0].moderators}
                 />
                 <DashboardStats 
                     icon=''
                     title='Users'
-                    value='1'
+                    value={stats[0].users}
                 />
             </div>
         </div>

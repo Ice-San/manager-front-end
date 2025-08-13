@@ -20,6 +20,7 @@
       "@hooks/*": ["hooks/*"],
       "@assets/*": ["assets/*"],
       "@helpers/*": ["helpers/*"],
+      "@data/*": ["data/*"],
       "@styles/*": ["styles/*"]
     }
   },

@@ -1,0 +1,23 @@
+[
+    {
+        "username": "John Doe",
+        "role": "Admin",
+        "state": "Active",
+        "email": "john.doe@example.com",
+        "joined": "1/15/2024"
+    },
+    {
+        "username": "Jane Smith",
+        "role": "User",
+        "state": "Active",
+        "email": "jane.smith@example.com",
+        "joined": "2/20/2024"
+    },
+    {
+        "username": "Mike Johnson",
+        "role": "Moderator",
+        "state": "Inactive",
+        "email": "mike.johnson@example.com",
+        "joined": "3/10/2024"
+    }
+]
