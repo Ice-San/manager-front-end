@@ -1,22 +1,22 @@
 [
     {
         "username": "John Doe",
-        "role": "Admin",
-        "state": "Active",
+        "role": "admin",
+        "state": "active",
         "email": "john.doe@example.com",
         "joined": "1/15/2024"
     },
     {
         "username": "Jane Smith",
-        "role": "User",
-        "state": "Active",
+        "role": "user",
+        "state": "active",
         "email": "jane.smith@example.com",
         "joined": "2/20/2024"
     },
     {
         "username": "Mike Johnson",
-        "role": "Moderator",
-        "state": "Inactive",
+        "role": "moderator",
+        "state": "inactive",
         "email": "mike.johnson@example.com",
         "joined": "3/10/2024"
     }

@@ -5,6 +5,7 @@ import { Providers } from './providers';
 import { Routes } from './routes'
 
 import './styles/index.css';
+import '../globals/extensions/prototypes';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -12,18 +12,17 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
       "@hooks/*": ["hooks/*"],
-      "@assets/*": ["assets/*"],
       "@helpers/*": ["helpers/*"],
       "@data/*": ["data/*"],
       "@styles/*": ["styles/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "globals"],
   "exclude": ["node_modules", "dist"]
 }

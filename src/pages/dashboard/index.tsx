@@ -11,11 +11,6 @@ import '@styles/index.css';
 import './styles/index.css';
 import './styles/media-querys.css';
 
-import addUserBlack from '@assets/img/add-user-black.png';
-import addUserWhite from '@assets/img/add-user-white.png';
-import userListBlack from '@assets/img/user-list-black.png';
-import searchIcon from '@assets/img/search-icon.png';
-
 import users from '@data/users.json';
 import stats from '@data/stats.json';
 
@@ -43,7 +38,7 @@ export const DashboardPage = () => {
                 <div className="dashboard-add">
                     <div className="dashboard-add-title">
                         <div className="dashboard-add-title-top">
-                            <Icon className="dashboard-add-icon" url={addUserBlack} />
+                            <Icon className="dashboard-add-icon" url="/img/add-user-black.png" />
                             <h2>Add New User</h2>
                         </div>
 
@@ -74,7 +69,7 @@ export const DashboardPage = () => {
                             </div>
 
                             <button className="dashboard-add-btn">
-                                <Icon className="dashboard-add-icon-btn" url={addUserWhite} />
+                                <Icon className="dashboard-add-icon-btn" url='/img/add-user-white.png' />
                                 Add User
                             </button>
                         </form>
@@ -84,7 +79,7 @@ export const DashboardPage = () => {
                 <div className="dashboard-list">
                     <div className="dashboard-list-title">
                         <div className="dashboard-list-title-top">
-                            <Icon className="dashboard-list-icon" url={userListBlack} />
+                            <Icon className="dashboard-list-icon" url='/img/user-list-black.png' />
                             <h2>User List (3)</h2>
                         </div>
                     
@@ -95,7 +90,7 @@ export const DashboardPage = () => {
 
                     <div className="dashboard-list-content">
                         <div className="dashboard-list-searchbar">
-                            <Icon className="dashboard-list-searchbar-icon" url={searchIcon} />
+                            <Icon className="dashboard-list-searchbar-icon" url="/img/search-icon.png" />
                             <input type="text" placeholder="Search users by name, email or role..." />
                         </div>
 
@@ -104,6 +99,8 @@ export const DashboardPage = () => {
                                 <UserItems
                                     key={index}
                                     {...user}
+                                    role={user.role.toCapitalize()}
+                                    state={user.state.toCapitalize()}
                                 />
                             ))}
                         </div>

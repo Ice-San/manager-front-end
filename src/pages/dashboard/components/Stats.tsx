@@ -1,5 +1,4 @@
 import { Icon } from "@components/Icon";
-import userListBlue from '@assets/img/user-list-blue.png';
 
 type StatsType = {
     icon: string,
@@ -12,7 +11,7 @@ export const Stats = ({icon, title, value}: StatsType) => {
         <>
             <div className="dashboard-stats-item">
                 <div className="dashboard-stats-title">
-                    {icon ? <Icon className={icon} url={userListBlue} /> : <span data-role={title}>{title.charAt(0)}</span>}
+                    {icon ? <Icon className={icon} url="/img/user-list-blue" /> : <span data-role={title}>{title.charAt(0)}</span>}
 
                     <div className="dashboard-stats-title-content">
                         <h2>{title}</h2>

@@ -1,8 +1,6 @@
 import { Icon } from "./Icon";
 import { getInitials } from "@utils/getInitials";
 
-import deleteIcon from '@assets/img/delete.png';
-
 type UserItemsType = {
     username: string,
     role: string,
@@ -33,7 +31,7 @@ export const UserItems = ({username, role, state, email, joined}: UserItemsType)
                 </div>
 
                 <button className="dashboard-list-item-delete">
-                    <Icon className="dashboard-list-item-delete-icon" url={deleteIcon} />
+                    <Icon className="dashboard-list-item-delete-icon" url="/img/delete.png" />
                 </button>
             </div>
         </>
