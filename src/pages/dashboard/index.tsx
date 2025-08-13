@@ -115,22 +115,22 @@ export const DashboardPage = () => {
                 <DashboardStats 
                     icon='dashboard-total-icon'
                     title='Total Users'
-                    value={stats[0].totalUsers}
+                    value={stats.totalUsers}
                 />
                 <DashboardStats 
                     icon=''
                     title='Admins'
-                    value={stats[0].admins}
+                    value={stats.admins}
                 />
                 <DashboardStats 
                     icon=''
                     title='Moderators'
-                    value={stats[0].moderators}
+                    value={stats.moderators}
                 />
                 <DashboardStats 
                     icon=''
                     title='Users'
-                    value={stats[0].users}
+                    value={stats.users}
                 />
             </div>
         </div>
