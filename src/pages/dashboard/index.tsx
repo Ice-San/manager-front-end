@@ -12,7 +12,7 @@ import './styles/index.css';
 import './styles/media-querys.css';
 
 import users from '@data/users.json';
-import stats from '@data/stats.json';
+import stats from '@data/stats';
 
 export const DashboardPage = () => {
     const navegate = useNavigate();
