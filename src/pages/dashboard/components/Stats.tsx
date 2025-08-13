@@ -1,13 +1,13 @@
-import { Icon } from "./Icon";
+import { Icon } from "@components/Icon";
 import userListBlue from '@assets/img/user-list-blue.png';
 
-type DashboardStatsType = {
+type StatsType = {
     icon: string,
     title: string,
     value: string | number
 }
 
-export const DashboardStats = ({icon, title, value}: DashboardStatsType) => {
+export const Stats = ({icon, title, value}: StatsType) => {
     return (
         <>
             <div className="dashboard-stats-item">

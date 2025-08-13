@@ -5,7 +5,7 @@ import { validation } from "@utils/validation";
 
 import { Icon } from "@components/Icon";
 import { UserItems } from "@components/UserItem";
-import { DashboardStats } from "@components/DashboardStats";
+import { Stats } from "./components/Stats";
 
 import '@styles/index.css';
 import './styles/index.css';
@@ -112,22 +112,22 @@ export const DashboardPage = () => {
             </div>
 
             <div className="dashboard-stats">
-                <DashboardStats 
+                <Stats 
                     icon='dashboard-total-icon'
                     title='Total Users'
                     value={stats.totalUsers}
                 />
-                <DashboardStats 
+                <Stats 
                     icon=''
                     title='Admins'
                     value={stats.admins}
                 />
-                <DashboardStats 
+                <Stats 
                     icon=''
                     title='Moderators'
                     value={stats.moderators}
                 />
-                <DashboardStats 
+                <Stats 
                     icon=''
                     title='Users'
                     value={stats.users}
