@@ -19,14 +19,18 @@ export const DashboardPage = () => {
     const navegate = useNavigate();
     const [cookies] = useCookies(['token']);
 
-    useEffect(() => {
-        const token = cookies?.token;
+    // useEffect(() => {
+    //     const token = cookies?.token;
 
-        (async () => {
-            const auth = await validation(token as string);
-            if(!auth) navegate('/');
-        })();
-    },[]);
+    //     (async () => {
+    //         const auth = await validation(token as string);
+    //         if(!auth) navegate('/');
+    //     })();
+    // },[]);
+
+    const handleRemoveUser = (email: string) => {
+        setUsersData(prevUser => prevUser.filter(user => user.email !== email));
+    }
 
     return (
         <div className="dashboard">
@@ -81,7 +85,7 @@ export const DashboardPage = () => {
                     <div className="dashboard-list-title">
                         <div className="dashboard-list-title-top">
                             <Icon className="dashboard-list-icon" url='/img/user-list-black.png' />
-                            <h2>User List (3)</h2>
+                            <h2>User List ({stats.totalUsers})</h2>
                         </div>
                     
                         <div className="dashboard-list-title-bottom">
@@ -100,6 +104,7 @@ export const DashboardPage = () => {
                                 <UserItems
                                     key={index}
                                     {...user}
+                                    onDelete={handleRemoveUser}
                                 />
                             ))}
                         </div>

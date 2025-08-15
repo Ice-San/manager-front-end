@@ -6,10 +6,11 @@ type UserItemsType = {
     role: string,
     state: string,
     email: string,
-    joined: string
+    joined: string,
+    onDelete: (email: string) => void
 }
 
-export const UserItems = ({username, role, state, email, joined}: UserItemsType) => {
+export const UserItems = ({username, role, state, email, joined, onDelete}: UserItemsType) => {
     return (
         <>
             <div className="dashboard-list-item">
@@ -30,7 +31,7 @@ export const UserItems = ({username, role, state, email, joined}: UserItemsType)
                     </div>
                 </div>
 
-                <button className="dashboard-list-item-delete">
+                <button className="dashboard-list-item-delete" onClick={() => onDelete(email)}>
                     <Icon className="dashboard-list-item-delete-icon" url="/img/delete.png" />
                 </button>
             </div>
