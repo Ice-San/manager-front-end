@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
 import { validation } from "@utils/validation";
+import { ToastContainer, toast } from 'react-toastify';
 
 import { Icon } from "@components/Icon";
 import { UserItems } from "@components/UserItem";
@@ -14,22 +16,53 @@ import './styles/media-querys.css';
 import users from '@data/users.json';
 import stats from '@data/stats';
 
+type AddUserForm = {
+    username: string,
+    email: string,
+    role: string
+}
+
 export const DashboardPage = () => {
     const [ usersData, setUsersData ] = useState(users);
+    const { register, handleSubmit, formState: { errors } } = useForm<AddUserForm>();
     const navegate = useNavigate();
     const [cookies] = useCookies(['token']);
 
-    // useEffect(() => {
-    //     const token = cookies?.token;
+    useEffect(() => {
+        const token = cookies?.token;
 
-    //     (async () => {
-    //         const auth = await validation(token as string);
-    //         if(!auth) navegate('/');
-    //     })();
-    // },[]);
+        (async () => {
+            const auth = await validation(token as string);
+            if(!auth) navegate('/');
+        })();
+    },[]);
+
+    const handleAddUser = ({username, role, email}: AddUserForm) => {
+        const date = new Date();
+        const user = {
+            username,
+            role,
+            state: "active",
+            email,
+            joined: `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+        }
+
+        setUsersData(prev => [...prev, user])
+    }
 
     const handleRemoveUser = (email: string) => {
         setUsersData(prevUser => prevUser.filter(user => user.email !== email));
+    }
+
+    const onUserAddError = (err: any) => {
+        Object.values(err).map((err: any) => {
+            toast.warning(err.message, {
+                position: "top-left",
+                pauseOnHover: false,
+                draggable: 'touch'
+            });
+            return;
+        });
     }
 
     return (
@@ -53,15 +86,35 @@ export const DashboardPage = () => {
                     </div>
 
                     <div className="dashboard-add-form">
-                        <form action="">
+                        <form action="" onSubmit={handleSubmit(handleAddUser, onUserAddError)}>
                             <div className="dashboard-add-form-inputs">
                                 <label>Full Name</label>
-                                <input type="text" placeholder="Enter full name" />
+                                <input 
+                                    {...register('username', {
+                                        required: 'It seems you don\'t put an name'
+                                    })}
+                                    type="text" 
+                                    placeholder="Enter full name" 
+                                />
                             </div>
 
                             <div className="dashboard-add-form-inputs">
                                 <label>Email Address</label>
-                                <input type="text" placeholder="Enter email address" />
+                                <input
+                                    {...register('email', { 
+                                        required: 'It seems you don\'t put an email', 
+                                        pattern: {
+                                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i, 
+                                            message: "The email isn't valid!"
+                                        },
+                                        maxLength: {
+                                            value: 100, 
+                                            message: "You can only write 100 characters on email input!"
+                                        } 
+                                    })}  
+                                    type="text" 
+                                    placeholder="Enter email address" 
+                                />
                             </div>
 
                             <div className="dashboard-add-form-inputs">
@@ -73,7 +126,7 @@ export const DashboardPage = () => {
                                 </select>
                             </div>
 
-                            <button className="dashboard-add-btn">
+                            <button className="dashboard-add-btn" type="submit">
                                 <Icon className="dashboard-add-icon-btn" url='/img/add-user-white.png' />
                                 Add User
                             </button>
@@ -134,6 +187,8 @@ export const DashboardPage = () => {
                     value={stats.users}
                 />
             </div>
+
+            <ToastContainer />
         </div>
     )
 };
