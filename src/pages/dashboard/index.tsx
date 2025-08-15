@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
 import { validation } from "@utils/validation";
@@ -15,6 +15,7 @@ import users from '@data/users.json';
 import stats from '@data/stats';
 
 export const DashboardPage = () => {
+    const [ usersData, setUsersData ] = useState(users);
     const navegate = useNavigate();
     const [cookies] = useCookies(['token']);
 
@@ -95,7 +96,7 @@ export const DashboardPage = () => {
                         </div>
 
                         <div className="dashboard-list-users">
-                            {users.map((user, index) => (
+                            {usersData.map((user, index) => (
                                 <UserItems
                                     key={index}
                                     {...user}
