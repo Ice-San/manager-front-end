@@ -24,7 +24,9 @@ type AddUserForm = {
 
 export const DashboardPage = () => {
     const [ usersData, setUsersData ] = useState(users);
+    const [ kpis, setKpis ] = useState(stats);
     const [ searchUsers, setSearchUsers ] = useState('');
+    
     const { register, handleSubmit, formState: { errors } } = useForm<AddUserForm>();
     const navegate = useNavigate();
     const [cookies] = useCookies(['token']);
@@ -38,6 +40,15 @@ export const DashboardPage = () => {
         })();
     },[]);
 
+    useEffect(() => {
+        setKpis({
+            totalUsers: usersData.length,
+            admins: usersData.filter(user => user.role === "admin").length,
+            moderators: usersData.filter(user => user.role === "moderator").length,
+            users: usersData.filter(user => user.role === "user").length
+        });
+    }, [usersData])
+
     const filteredUsers = usersData.filter(
         user => user.username.toLowerCase().includes(searchUsers.toLowerCase())
     );
@@ -46,13 +57,13 @@ export const DashboardPage = () => {
         const date = new Date();
         const user = {
             username,
-            role,
+            role: role.toLowerCase(),
             state: "active",
             email,
             joined: `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
         }
 
-        setUsersData(prev => [...prev, user])
+        setUsersData(prev => [...prev, user]);
     }
 
     const handleRemoveUser = (email: string) => {
@@ -91,7 +102,7 @@ export const DashboardPage = () => {
                     </div>
 
                     <div className="dashboard-add-form">
-                        <form action="" onSubmit={handleSubmit(handleAddUser, onUserAddError)}>
+                        <form onSubmit={handleSubmit(handleAddUser, onUserAddError)}>
                             <div className="dashboard-add-form-inputs">
                                 <label>Full Name</label>
                                 <input 
@@ -124,7 +135,7 @@ export const DashboardPage = () => {
 
                             <div className="dashboard-add-form-inputs">
                                 <label>Role</label>
-                                <select>
+                                <select {...register('role')}>
                                     <option>User</option>
                                     <option>Moderator</option>
                                     <option>Admin</option>
@@ -162,9 +173,9 @@ export const DashboardPage = () => {
                         </div>
 
                         <div className="dashboard-list-users">
-                            {filteredUsers.map((user, index) => (
+                            {filteredUsers.map((user) => (
                                 <UserItems
-                                    key={index}
+                                    key={user.email}
                                     {...user}
                                     onDelete={handleRemoveUser}
                                 />
@@ -178,22 +189,22 @@ export const DashboardPage = () => {
                 <Stats 
                     icon='dashboard-total-icon'
                     title='Total Users'
-                    value={stats.totalUsers}
+                    value={kpis.totalUsers}
                 />
                 <Stats 
                     icon=''
                     title='Admins'
-                    value={stats.admins}
+                    value={kpis.admins}
                 />
                 <Stats 
                     icon=''
                     title='Moderators'
-                    value={stats.moderators}
+                    value={kpis.moderators}
                 />
                 <Stats 
                     icon=''
                     title='Users'
-                    value={stats.users}
+                    value={kpis.users}
                 />
             </div>
 
