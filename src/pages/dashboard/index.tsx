@@ -24,6 +24,7 @@ type AddUserForm = {
 
 export const DashboardPage = () => {
     const [ usersData, setUsersData ] = useState(users);
+    const [ searchUsers, setSearchUsers ] = useState('');
     const { register, handleSubmit, formState: { errors } } = useForm<AddUserForm>();
     const navegate = useNavigate();
     const [cookies] = useCookies(['token']);
@@ -36,6 +37,10 @@ export const DashboardPage = () => {
             if(!auth) navegate('/');
         })();
     },[]);
+
+    const filteredUsers = usersData.filter(
+        user => user.username.toLowerCase().includes(searchUsers.toLowerCase())
+    );
 
     const handleAddUser = ({username, role, email}: AddUserForm) => {
         const date = new Date();
@@ -149,11 +154,15 @@ export const DashboardPage = () => {
                     <div className="dashboard-list-content">
                         <div className="dashboard-list-searchbar">
                             <Icon className="dashboard-list-searchbar-icon" url="/img/search-icon.png" />
-                            <input type="text" placeholder="Search users by name, email or role..." />
+                            <input
+                                onChange={e => setSearchUsers(e.target.value)}
+                                type="text" 
+                                placeholder="Search users by name, email or role..." 
+                            />
                         </div>
 
                         <div className="dashboard-list-users">
-                            {usersData.map((user, index) => (
+                            {filteredUsers.map((user, index) => (
                                 <UserItems
                                     key={index}
                                     {...user}
