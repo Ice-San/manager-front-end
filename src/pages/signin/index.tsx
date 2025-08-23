@@ -20,8 +20,6 @@ export const SignInPage = () => {
     const [cookies, setCookie] = useCookies(['token']);
 
     const onSubmit = async (dataForm: FormData) => {
-        console.log(dataForm);
-
         try {
             const response = await fetch(`${VITE_API_ENDPOINT}/auth/signin`, {
                 method: "POST",
@@ -29,7 +27,7 @@ export const SignInPage = () => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(dataForm)
-            });
+            })
             const { data, status } = await response.json();
             const { success, token } = data;
     

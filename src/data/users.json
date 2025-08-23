@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "username": "John Doe",
         "role": "admin",
         "state": "active",
@@ -7,6 +8,7 @@
         "joined": "1/15/2024"
     },
     {
+        "id": 2,
         "username": "Jane Smith",
         "role": "user",
         "state": "active",
@@ -14,6 +16,7 @@
         "joined": "2/20/2024"
     },
     {
+        "id": 3,
         "username": "Mike Johnson",
         "role": "moderator",
         "state": "inactive",
