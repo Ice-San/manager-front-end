@@ -3,6 +3,9 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+
+import { SelectLanguage } from '@components/SelectLanguage';
 
 import './index.css';
 
@@ -16,6 +19,7 @@ type FormData = {
 export const SignInPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
     const navegate = useNavigate();
+    const { t } = useTranslation("signin");
 
     const [cookies, setCookie] = useCookies(['token']);
 
@@ -87,8 +91,9 @@ export const SignInPage = () => {
         <div className="background">
             <div className="auth-box">
                 <div className="auth-box-title">
-                    <h1>Login to your account</h1>
+                    <h1>{ t("title") }</h1>
                     <p>Enter your email below to login to your account</p>
+                    <SelectLanguage />
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit, onError)}>

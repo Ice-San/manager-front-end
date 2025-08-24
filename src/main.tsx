@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { Providers } from './providers';
 import { Routes } from './routes'
 
+import './i18n';
 import './styles/index.css';
 import '../globals/extensions/prototypes';
 
