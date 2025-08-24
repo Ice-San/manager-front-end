@@ -14,6 +14,7 @@ export default defineConfig({
       "@hooks": "/src/hooks",
       "@helpers": "/src/helpers",
       "@data": "/src/data",
+      "@types": "/src/types",
     },
   },
 });

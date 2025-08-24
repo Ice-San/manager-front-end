@@ -1,4 +1,4 @@
-export type Language = "en" | "pt";
+import { Language } from "types/language";
 
 export type LanguageContextType = {
     language: Language,

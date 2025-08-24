@@ -20,7 +20,8 @@
       "@hooks/*": ["hooks/*"],
       "@helpers/*": ["helpers/*"],
       "@data/*": ["data/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@types/*": ["types/*"]
     }
   },
   "include": ["src", "globals"],
