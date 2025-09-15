@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
 import { validation } from "@utils/validation";
 import { ToastContainer, toast } from 'react-toastify';
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "@components/Icon";
 import { Stats } from "./components/Stats";
@@ -28,6 +29,7 @@ export const DashboardPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<Form>();
     const navegate = useNavigate();
     const [cookies] = useCookies(['token']);
+    const { t } = useTranslation("dashboard");
 
     const [ users, setUsers ] = useState<User[]>(usersData);
     const [ stats, setStats ] = useState(statsData);
@@ -88,8 +90,8 @@ export const DashboardPage = () => {
     return (
         <div className="dashboard">
             <div className="dashboard-title">
-                <h1>Manager</h1>
-                <p>Manage your users efficiently with add, remove, and search functionality.</p>
+                <h1>{ t("title") }</h1>
+                <p>{ t("subtitle") }</p>
             </div>
 
             <div className="dashboard-users">
@@ -97,58 +99,58 @@ export const DashboardPage = () => {
                     <div className="dashboard-add-title">
                         <div className="dashboard-add-title-top">
                             <Icon className="dashboard-add-icon" url="/img/add-user-black.png" />
-                            <h2>Add New User</h2>
+                            <h2>{ t("addUserTitle") }</h2>
                         </div>
 
                         <div className="dashboard-add-title-bottom">
-                            Fill in the details to add a new user to the system.
+                            { t("addUserSubtitle") }
                         </div>
                     </div>
 
                     <div className="dashboard-add-form">
                         <form onSubmit={handleSubmit(handleAdd, handleError)}>
                             <div className="dashboard-add-form-inputs">
-                                <label>Full Name</label>
+                                <label> { t("fullname") } </label>
                                 <input 
                                     {...register('username', {
-                                        required: 'It seems you don\'t put an name'
+                                        required: t("fullnameRequired")
                                     })}
                                     type="text" 
-                                    placeholder="Enter full name" 
+                                    placeholder={ t("fullnamePlaceholder") }
                                 />
                             </div>
 
                             <div className="dashboard-add-form-inputs">
-                                <label>Email Address</label>
+                                <label>{ t("email") }</label>
                                 <input
                                     {...register('email', { 
-                                        required: 'It seems you don\'t put an email', 
+                                        required: t("emailRequired"), 
                                         pattern: {
                                             value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i, 
-                                            message: "The email isn't valid!"
+                                            message: t("emailPattern")
                                         },
                                         maxLength: {
                                             value: 100, 
-                                            message: "You can only write 100 characters on email input!"
+                                            message: t("emailMaxLength")
                                         } 
                                     })} 
                                     type="text" 
-                                    placeholder="Enter email address" 
+                                    placeholder={ t("emailPlaceholder") }
                                 />
                             </div>
 
                             <div className="dashboard-add-form-inputs">
-                                <label>Role</label>
+                                <label>{ t("role") }</label>
                                 <select {...register('role')}>
-                                    <option>User</option>
-                                    <option>Moderator</option>
-                                    <option>Admin</option>
+                                    <option>{ t("roleUserOption") }</option>
+                                    <option>{ t("roleModeratorOption") }</option>
+                                    <option>{ t("roleAdminOption") }</option>
                                 </select>
                             </div>
 
                             <button className="dashboard-add-btn" type="submit">
                                 <Icon className="dashboard-add-icon-btn" url='/img/add-user-white.png' />
-                                Add User
+                                { t("adduser") }
                             </button>
                         </form>
                     </div>
@@ -160,22 +162,22 @@ export const DashboardPage = () => {
             <div className="dashboard-stats">
                 <Stats 
                     icon='dashboard-total-icon'
-                    title='Total Users'
+                    title={ t("totalusers") }
                     value={stats.totalUsers}
                 />
                 <Stats 
                     icon=''
-                    title='Admins'
+                    title={ t("admins") }
                     value={stats.admins}
                 />
                 <Stats 
                     icon=''
-                    title='Moderators'
+                    title={ t("moderators") }
                     value={stats.moderators}
                 />
                 <Stats 
                     icon=''
-                    title='Users'
+                    title={ t("users") }
                     value={stats.users}
                 />
             </div>

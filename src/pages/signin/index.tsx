@@ -92,7 +92,7 @@ export const SignInPage = () => {
             <div className="auth-box">
                 <div className="auth-box-title">
                     <h1>{ t("title") }</h1>
-                    <p>Enter your email below to login to your account</p>
+                    <p>{ t("subtitle") }</p>
                     <SelectLanguage />
                 </div>
 
@@ -104,14 +104,14 @@ export const SignInPage = () => {
                             </div>
                             <input 
                                 {...register('email', { 
-                                    required: 'It seems you don\'t put an email', 
+                                    required: t("emailRequired"), 
                                     pattern: {
                                         value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i, 
-                                        message: "The email isn't valid!"
+                                        message: t("emailPattern")
                                     },
                                     maxLength: {
                                         value: 100, 
-                                        message: "You can only write 100 characters on email input!"
+                                        message: t("emailMaxLength")
                                     } 
                                 })} 
                                 className='inputs' 
@@ -122,14 +122,14 @@ export const SignInPage = () => {
 
                         <div className="input">
                             <div className="label">
-                                <h2>Password</h2>
+                                <h2>{ t("password") }</h2>
                             </div>
                             <input 
                                 {...register('password', { 
-                                    required: 'It seems you don\'t put an password', 
+                                    required: t("passwordRequired"), 
                                     maxLength: {
                                         value: 100, 
-                                        message: "You can only write 100 characters on email input!"
+                                        message: t("passwordMaxLength")
                                     } 
                                 })}
                                 className='inputs' 

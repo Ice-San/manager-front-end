@@ -1,3 +1,10 @@
 {
-    "title": "Faça login da sua conta!"
+    "title": "Faça login na sua conta",
+    "subtitle": "Escreva o seu email abaixo para entrar na sua conta",
+    "emailRequired": "Parece que não escreveu o email",
+    "emailPattern": "O email fornecido não é valido!",
+    "emailMaxLength": "Só pode escrever até 100 caracteres no email!",
+    "password": "Senha",
+    "passwordRequired": "Parece que não têm uma senha",
+    "passwordMaxLength": "Só pode escrever até 100 caracteres na senha!"
 }

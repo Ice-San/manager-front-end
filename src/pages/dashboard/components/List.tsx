@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "@components/Icon";
 import { UserItems } from "@components/UserItem";
@@ -15,6 +16,7 @@ type List = {
 
 export const List = ({ users, setUsers, stats }: List) => {
     const [ input, setInput ] = useState('');
+    const { t } = useTranslation("dashboard");
 
     const handleDelete = (email: string) => {
         setUsers(prevUser => prevUser.filter(user => user.email !== email));
@@ -26,11 +28,11 @@ export const List = ({ users, setUsers, stats }: List) => {
                 <div className="dashboard-list-title">
                     <div className="dashboard-list-title-top">
                         <Icon className="dashboard-list-icon" url='/img/user-list-black.png' />
-                        <h2>User List ({stats.totalUsers})</h2>
+                        <h2>{ t("userlistTitle") } ({stats.totalUsers})</h2>
                     </div>
                 
                     <div className="dashboard-list-title-bottom">
-                        Search and manage existing users in the system.
+                        { t("userlistSubtitle") }
                     </div>
                 </div>
 
@@ -40,7 +42,7 @@ export const List = ({ users, setUsers, stats }: List) => {
                         <input
                             onChange={e => setInput(e.target.value)}
                             type="text" 
-                            placeholder="Search users by name, email or role..." 
+                            placeholder={ t("searchPlaceholder") }
                         />
                     </div>
 
