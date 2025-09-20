@@ -1,34 +1,90 @@
 {
-    "back": "Voltar aos Utilizadores",
-    "savechanges": "Guardar Alterações",
-    "lastlogin": "Último acesso",
-    "userInfoTitle": "Informações do Utilizador",
-    "userInforSubtitle": "Veja o perfil e os detalhes da conta do utilizador",
-    "basicInfo": "INFORMAÇÕES BÁSICAS",
-    "fullname": "Nome Completo",
-    "email": "Endereço de Email",
-    "phoneNumber": "Número de Telefone",
-    "role": "Função",
-    "roleAdminOption": "Administrador",
-    "roleModeratorOption": "Moderador",
-    "roleUserOption": "Utilizador",
-    "additionalDetails": "DETALHES ADICIONAIS",
-    "address": "Morada",
-    "bio": "Biografia",
-    "bioPlaceholder": "Insira a biografia",
-    "accountStatus": "Estado da Conta",
-    "active": "Ativo",
-    "inactive": "Inativo",
-    "changePassword": "ALTERAR PALAVRA-PASSE",
-    "currentPassword": "Palavra-passe Atual",
-    "currentPasswordPlaceholder": "Insira a palavra-passe atual",
-    "newPassword": "Nova Palavra-passe",
-    "newPasswordPlaceholder": "Insira a nova palavra-passe",
-    "confirmPassword": "Confirmar Palavra-passe",
-    "confirmPasswordPlaceholder": "Insira novamente a nova palavra-passe",
-    "updatePassword": "Atualizar Palavra-passe",
-    "dangerzone": "ZONA DE PERIGO",
-    "deleteAccountTitle": "Eliminar Conta do Utilizador",
-    "deleteAccountSubtitle": "Esta ação não pode ser revertida. A conta do utilizador será eliminada permanentemente.",
-    "deleteUser": "Eliminar Utilizador"
+  "back": "Voltar para Utilizadores",
+  "savechanges": "Guardar Alterações",
+  "lastlogin": "Último login",
+  
+  "top": {
+    "role": {
+      "title": "Função",
+      "admin": "Administrador",
+      "moderator": "Moderador",
+      "user": "Utilizador"
+    },
+    "status": {
+      "title": "Estado da Conta",
+      "active": "Ativa",
+      "inactive": "Inativa"
+    }
+  },
+
+  "userinfo": {
+    "title": "Informações do Utilizador",
+    "subtitle": "Ver perfil do utilizador e detalhes da conta"
+  },
+
+  "basicinfo": {
+    "title": "INFORMAÇÃO BÁSICA",
+    "fullname": {
+      "title": "Nome Completo",
+      "required": "Precisa de inserir um nome de utilizador!",
+      "maxlength": "O nome de utilizador não pode ter mais de 100 caracteres!"
+    },
+    "email": {
+      "title": "Endereço de Email",
+      "required": "Precisa de inserir um email!",
+      "pattern": "O email não é válido!",
+      "maxlength": "O email não pode ter mais de 100 caracteres!"
+    },
+    "phoneNumber": {
+      "title": "Número de Telefone",
+      "required": "Precisa de inserir um número de telefone!",
+      "pattern": "O número de telefone não é válido!",
+      "maxlength": "O número de telefone não pode ter mais de 30 caracteres!"
+    }
+  },
+
+  "additionaldetails": {
+    "title": "DETALHES ADICIONAIS",
+    "address": {
+      "title": "Endereço",
+      "maxlength": "O endereço não pode ter mais de 255 caracteres!"
+    },
+    "bio": {
+      "title": "Biografia",
+      "maxlength": "A biografia não pode ter mais de 255 caracteres!"
+    },
+    "bioPlaceholder": "Inserir Biografia"
+  },
+
+  "changepassword": {
+    "title": "ALTERAR PALAVRA-PASSE",
+    "current": {
+      "label": "Palavra-Passe Atual",
+      "required": "Precisa de inserir a sua palavra-passe atual!",
+      "maxlength": "A palavra-passe não pode ter mais de 100 caracteres!",
+      "placeholder": "Insira a palavra-passe atual"
+    },
+    "new": {
+      "label": "Nova Palavra-Passe",
+      "required": "Precisa de inserir a nova palavra-passe!",
+      "maxlength": "A palavra-passe não pode ter mais de 100 caracteres!",
+      "placeholder": "Insira a nova palavra-passe"
+    },
+    "confirm": {
+      "label": "Confirmar Palavra-Passe",
+      "required": "Precisa de confirmar a nova palavra-passe!",
+      "maxlength": "A palavra-passe não pode ter mais de 100 caracteres!",
+      "placeholder": "Insira novamente a nova palavra-passe"
+    },
+    "update": "Atualizar Palavra-Passe"
+  },
+
+  "dangerzone": {
+    "title": "ZONA DE PERIGO",
+    "deleteAccount": {
+      "title": "Eliminar Conta de Utilizador",
+      "subtitle": "Esta ação não pode ser desfeita. Isto irá eliminar permanentemente a conta do utilizador.",
+      "button": "Eliminar Utilizador"
+    }
+  }
 }

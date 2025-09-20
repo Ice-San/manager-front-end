@@ -1,34 +1,90 @@
 {
-    "back": "Back to Users",
-    "savechanges": "Save Changes",
-    "lastlogin": "Last login",
-    "userInfoTitle": "User Information",
-    "userInforSubtitle": "View user profile and account details",
-    "basicInfo": "BASIC INFORMATION",
-    "fullname": "Full Name",
-    "email": "Email Adress",
-    "phoneNumber": "Phone Number",
-    "role": "Role",
-    "roleAdminOption": "Admin",
-    "roleModeratorOption": "Moderator",
-    "roleUserOption": "User",
-    "additionalDetails": "ADDITIONAL DETAILS",
-    "address": "Address",
-    "bio": "Bio",
-    "bioPlaceholder": "Enter Bio",
-    "accountStatus": "Account Status",
-    "active": "Active",
-    "inactive": "Inactive",
-    "changePassword": "CHANGE PASSWORD",
-    "currentPassword": "Current Password",
-    "currentPasswordPlaceholder": "Enter current password",
-    "newPassword": "New Password",
-    "newPasswordPlaceholder": "Enter new password",
-    "confirmPassword": "Confirm Password",
-    "confirmPasswordPlaceholder": "Enter new password",
-    "updatePassword": "Update Password",
-    "dangerzone": "DANGER ZONE",
-    "deleteAccountTitle": "Delete User Account",
-    "deleteAccountSubtitle": "This action cannot be undone. This will permanently delete the user account.",
-    "deleteUser": "Delete User"
+  "back": "Back to Users",
+  "savechanges": "Save Changes",
+  "lastlogin": "Last login",
+  
+  "top": {
+    "role": {
+      "title": "Role",
+      "admin": "Admin",
+      "moderator": "Moderator",
+      "user": "User"
+    },
+    "status": {
+      "title": "Account Status",
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+
+  "userinfo": {
+    "title": "User Information",
+    "subtitle": "View user profile and account details"
+  },
+
+  "basicinfo": {
+    "title": "BASIC INFORMATION",
+    "fullname": {
+      "title": "Full Name",
+      "required": "You need to put an username!",
+      "maxlength": "The username can't have more than 100 characters!"
+    },
+    "email": {
+      "title": "Email Address",
+      "required": "You need to put an email!",
+      "pattern": "The email isn't valid!",
+      "maxlength": "The email can't have more than 100 characters!"
+    },
+    "phoneNumber": {
+      "title": "Phone Number",
+      "required": "You need to put an phone number!",
+      "pattern": "The phone number isn't valid!",
+      "maxlength": "The phone number can't have more than 30 characters!"
+    }
+  },
+
+  "additionaldetails": {
+    "title": "ADDITIONAL DETAILS",
+    "address": {
+      "title": "Address",
+      "maxlength": "The adress can't have more than 255 characters!"
+    },
+    "bio": {
+      "title": "Bio",
+      "maxlength": "The bio can't have more than 255 characters!"
+    },
+    "bioPlaceholder": "Enter Bio"
+  },
+
+  "changepassword": {
+    "title": "CHANGE PASSWORD",
+    "current": {
+      "label": "Current Password",
+      "required": "You need to put your current password!",
+      "maxlength": "The email can't have more than 100 characters!",
+      "placeholder": "Enter current password"
+    },
+    "new": {
+      "label": "New Password",
+      "required": "You need to put your new password!",
+      "maxlength": "The email can't have more than 100 characters!",
+      "placeholder": "Enter new password"
+    },
+    "confirm": {
+      "label": "Confirm Password",
+      "required": "You need to confirm your new password!",
+      "maxlength": "The email can't have more than 100 characters!",
+      "placeholder": "Enter new password"
+    },
+    "update": "Update Password"
+  },
+
+  "dangerzone": {
+    "title": "DANGER ZONE",
+    "deleteAccount": {
+      "title": "Delete User Account",
+      "subtitle": "This action cannot be undone. This will permanently delete the user account.",
+      "button": "Delete User"
+    }
+  }
 }

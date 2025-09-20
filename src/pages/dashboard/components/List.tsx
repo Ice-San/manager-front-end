@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "@components/Icon";
@@ -28,11 +29,11 @@ export const List = ({ users, setUsers, stats }: List) => {
                 <div className="dashboard-list-title">
                     <div className="dashboard-list-title-top">
                         <Icon className="dashboard-list-icon" url='/img/user-list-black.png' />
-                        <h2>{ t("userlistTitle") } ({stats.totalUsers})</h2>
+                        <h2>{t("userlist.title")} ({stats.totalUsers})</h2>
                     </div>
                 
                     <div className="dashboard-list-title-bottom">
-                        { t("userlistSubtitle") }
+                        { t("userlist.subtitle") }
                     </div>
                 </div>
 
@@ -42,17 +43,19 @@ export const List = ({ users, setUsers, stats }: List) => {
                         <input
                             onChange={e => setInput(e.target.value)}
                             type="text" 
-                            placeholder={ t("searchPlaceholder") }
+                            placeholder={ t("search.placeholder") }
                         />
                     </div>
 
                     <div className="dashboard-list-users">
                         {users.filter(user => match(user.username, input)).map(user => (
-                            <UserItems
-                                key={user.id}
-                                {...user}
-                                onDelete={handleDelete}
-                            />
+                            <Link className="dashboard-list-user" to='/profile'>
+                                <UserItems
+                                    key={user.id}
+                                    {...user}
+                                    onDelete={handleDelete}
+                                />
+                            </Link>
                         ))}
                     </div>
                 </div>

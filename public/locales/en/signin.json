@@ -1,10 +1,14 @@
 {
     "title": "Login to your account",
     "subtitle": "Enter your email below to login to your account",
-    "emailRequired": "It seems you don't put an email",
-    "emailPattern": "The email isn't valid!",
-    "emailMaxLength": "You can only write 100 characters on email input!",
-    "password": "Password",
-    "passwordRequired": "It seems you don't put an password",
-    "passwordMaxLength": "You can only write 100 characters on email input!"
+    "email": {
+        "required": "It seems you don't put an email",
+        "pattern": "The email isn't valid!",
+        "maxlength": "You can only write 100 characters on email input!"
+    },
+    "password": {
+        "title": "Password",
+        "required": "It seems you don't put an password",
+        "maxlength": "You can only write 100 characters on email input!"
+    }
 }

@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "@components/Icon";
+import { SelectLanguage } from "@components/SelectLanguage";
 import { Stats } from "./components/Stats";
 import { List } from "./components/List";
 
@@ -90,8 +91,14 @@ export const DashboardPage = () => {
     return (
         <div className="dashboard">
             <div className="dashboard-title">
-                <h1>{ t("title") }</h1>
-                <p>{ t("subtitle") }</p>
+                <div className="dashboard-title-content">
+                    <h1>{t("title")}</h1>
+                    <p>{t("subtitle")}</p>
+                </div>
+
+                <div>
+                    <SelectLanguage />
+                </div>
             </div>
 
             <div className="dashboard-users">
@@ -99,58 +106,58 @@ export const DashboardPage = () => {
                     <div className="dashboard-add-title">
                         <div className="dashboard-add-title-top">
                             <Icon className="dashboard-add-icon" url="/img/add-user-black.png" />
-                            <h2>{ t("addUserTitle") }</h2>
+                            <h2>{t("adduser.title")}</h2>
                         </div>
 
                         <div className="dashboard-add-title-bottom">
-                            { t("addUserSubtitle") }
+                            {t("adduser.subtitle")}
                         </div>
                     </div>
 
                     <div className="dashboard-add-form">
                         <form onSubmit={handleSubmit(handleAdd, handleError)}>
                             <div className="dashboard-add-form-inputs">
-                                <label> { t("fullname") } </label>
+                                <label> {t("fullname.title")} </label>
                                 <input 
                                     {...register('username', {
-                                        required: t("fullnameRequired")
+                                        required: t("fullname.required")
                                     })}
                                     type="text" 
-                                    placeholder={ t("fullnamePlaceholder") }
+                                    placeholder={t("fullname.placeholder")}
                                 />
                             </div>
 
                             <div className="dashboard-add-form-inputs">
-                                <label>{ t("email") }</label>
+                                <label>{t("email.title")}</label>
                                 <input
                                     {...register('email', { 
-                                        required: t("emailRequired"), 
+                                        required: t("email.required"), 
                                         pattern: {
                                             value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i, 
-                                            message: t("emailPattern")
+                                            message: t("email.pattern")
                                         },
                                         maxLength: {
                                             value: 100, 
-                                            message: t("emailMaxLength")
+                                            message: t("email.maxlength")
                                         } 
                                     })} 
                                     type="text" 
-                                    placeholder={ t("emailPlaceholder") }
+                                    placeholder={t("email.placeholder")}
                                 />
                             </div>
 
                             <div className="dashboard-add-form-inputs">
-                                <label>{ t("role") }</label>
+                                <label>{ t("role.title") }</label>
                                 <select {...register('role')}>
-                                    <option>{ t("roleUserOption") }</option>
-                                    <option>{ t("roleModeratorOption") }</option>
-                                    <option>{ t("roleAdminOption") }</option>
+                                    <option>{t("role.user")}</option>
+                                    <option>{t("role.moderator")}</option>
+                                    <option>{t("role.admin")}</option>
                                 </select>
                             </div>
 
                             <button className="dashboard-add-btn" type="submit">
                                 <Icon className="dashboard-add-icon-btn" url='/img/add-user-white.png' />
-                                { t("adduser") }
+                                {t("button.title")}
                             </button>
                         </form>
                     </div>

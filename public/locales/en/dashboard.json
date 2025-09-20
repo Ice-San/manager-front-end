@@ -1,24 +1,38 @@
 {
     "title": "Manager",
     "subtitle": "Manage your users efficiently with add, remove, and search functionality.",
-    "addUserTitle": "Add New User",
-    "addUserSubtitle": "Fill in the details to add a new user to the system.",
-    "fullname": "Full Name",
-    "fullnameRequired": "It seems you don't put an name",
-    "fullnamePlaceholder": "Enter Full name",
-    "email": "Email Adress",
-    "emailRequired": "It seems you don't put an email",
-    "emailPattern": "The email isn't valid!",
-    "emailMaxLength": "You can only write 100 characters on email input!",
-    "emailPlaceholder": "Enter email address",
-    "role": "Role",
-    "roleUserOption": "User",
-    "roleModeratorOption": "Moderator",
-    "roleAdminOption": "Admin",
-    "addUser": "Add User",
-    "userlistTitle": "User List",
-    "userlistSubtitle": "Search and manage existing users in the system.",
-    "searchPlaceholder": "Search users by name, email or role...",
+    "adduser": {
+        "title": "Add New User",
+        "subtitle": "Fill in the details to add a new user to the system."
+    },
+    "fullname": {
+        "title": "Full Name",
+        "required": "It seems you don't put an name",
+        "placeholder": "Enter Full name"
+    },
+    "email": {
+        "title": "Email Adress",
+        "required": "It seems you don't put an email",
+        "pattern": "The email isn't valid!",
+        "maxlength": "You can only write 100 characters on email input!",
+        "placeholder": "Enter email address"
+    },
+    "role": {
+        "title": "Role",
+        "user": "User",
+        "moderator": "Moderator",
+        "admin": "Admin"
+    },
+    "button": {
+        "title": "Add User"
+    },
+    "userlist": {
+        "title": "User List",
+        "subtitle": "Search and manage existing users in the system."
+    },
+    "search": {
+        "placeholder": "Search users by name, email or role..."
+    },
     "totalusers": "Total Users",
     "admins": "Admins",
     "moderators": "Moderators",

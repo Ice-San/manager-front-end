@@ -28,7 +28,7 @@
     line-height: 1.42857;
     white-space: nowrap;
 
-    cursor: default;
+    cursor: pointer;
 
     background-color: white;
     border-style: solid;
@@ -135,6 +135,8 @@
     align-items: center;
     flex-shrink: 0;
     gap: 8px;
+
+    cursor: pointer;
 
     background-color: #171717;
 
@@ -283,6 +285,7 @@
     font-size: 14px;
     line-height: 1.42857;
 
+    margin-top: 24px;
     margin-bottom: 16px;
 }
 
@@ -363,6 +366,10 @@
     height: 1px;
 }
 
+#profile-form > .horizontal-line {
+    margin-bottom: 24px;
+}
+
 .profile-additional-details > h2 {
     color: #737373;
     font-size: 14px;
@@ -413,8 +420,9 @@
 
 .profile-password > button {
     opacity: .5;
-    pointer-events: none;
     outline: none;
+
+    cursor: pointer;
 
     background-color: #171717;
     border-radius: 8px;
@@ -475,6 +483,8 @@
     background-color: #e7000b;
     border-radius: 8px;
     box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 1px 2px 0 #0000000d;
+
+    cursor: pointer;
 
     display: inline-flex;
     flex-shrink: 0;

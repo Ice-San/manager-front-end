@@ -6,10 +6,12 @@
 }
 
 .dashboard-title {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: calc(.25rem * 8);
 }
 
-.dashboard-title > h1 {
+.dashboard-title-content > h1 {
     font-size: 1.875rem;
     font-weight: 700;
     line-height: 1.2;
@@ -17,7 +19,7 @@
     margin-bottom: calc(.25rem * 2);
 }
 
-.dashboard-title > p {
+.dashboard-title-content > p {
     color: oklch(55.6% 0 0);
 }
 
@@ -283,7 +285,7 @@
     transition-duration: .15s;
 }
 
-.dashboard-list-item:not(:last-child) {
+.dashboard-list-user > * {
     margin-block-start: calc(calc(.25rem * 4) * 0);
     margin-block-end: calc(calc(.25rem * 4) * calc(1 - 0));
 }
