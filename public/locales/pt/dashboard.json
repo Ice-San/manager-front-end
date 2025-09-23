@@ -1,6 +1,7 @@
 {
     "title": "Manager",
     "subtitle": "Gerencie os seus utilizadores de forma eficiente com funcionalidades de adicionar, remover e pesquisar.",
+    "logout": "Logout",
     "adduser": {
         "title": "Adicionar Novo Utilizador",
         "subtitle": "Preencha os detalhes para adicionar um novo utilizador ao sistema."

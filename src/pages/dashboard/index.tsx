@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { validation } from "@utils/validation";
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from "react-i18next";
@@ -29,7 +29,7 @@ type Form = {
 export const DashboardPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<Form>();
     const navegate = useNavigate();
-    const [cookies] = useCookies(['token']);
+    const [cookies, removeCookie] = useCookies(['token']);
     const { t } = useTranslation("dashboard");
 
     const [ users, setUsers ] = useState<User[]>(usersData);
@@ -70,6 +70,10 @@ export const DashboardPage = () => {
         });
     }
 
+    const handleSignOut = () => {
+        removeCookie("token", { path: '/' });
+    }
+
     useEffect(() => {
         const token = cookies?.token;
 
@@ -96,8 +100,13 @@ export const DashboardPage = () => {
                     <p>{t("subtitle")}</p>
                 </div>
 
-                <div>
+                <div className="dashboard-right-content">
                     <SelectLanguage />
+
+                    <Link to="/" className="logout" onClick={() => handleSignOut()}>
+                        <Icon className="logout-icon" url="/img/logout.png" />
+                        <p>{t("logout")}</p>
+                    </Link>
                 </div>
             </div>
 

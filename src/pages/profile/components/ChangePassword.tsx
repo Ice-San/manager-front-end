@@ -2,19 +2,19 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from "react-i18next";
 
 type ChangePasswordType = {
-    currentp: string,
-    newp: string,
-    confirmp: string
+    currentPassword: string,
+    newPassword: string,
+    confirmPassword: string
 }
 
 export const ChangePassword = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ChangePasswordType>();
     const { t } = useTranslation("profile");
 
-    const handleAdd = ({currentp, newp, confirmp}: ChangePasswordType) => {
-        console.log(currentp);
-        console.log(newp);
-        console.log(confirmp);
+    const handleAdd = ({currentPassword, newPassword, confirmPassword}: ChangePasswordType) => {
+        console.log(currentPassword);
+        console.log(newPassword);
+        console.log(confirmPassword);
     }
 
     const handleError = (err: any) => {
@@ -23,56 +23,56 @@ export const ChangePassword = () => {
 
     return (
         <form className="profile-password" onSubmit={handleSubmit(handleAdd, handleError)}>
-            <h2>{t("changepassword.title")}</h2>
+            <h2>{t("password.title")}</h2>
 
             <div className="profile-basic-information-row">
                 <div className="profile-inputs">
-                    <label>{t("changepassword.current.label")}</label>
+                    <label>{t("password.current.label")}</label>
                     <input 
-                        {...register("currentp", {
-                            required: t("changepassword.current.required"),
+                        {...register("currentPassword", {
+                            required: t("password.current.required"),
                             maxLength: {
                                 value: 100, 
-                                message: t("changepassword.current.maxlength")
+                                message: t("password.current.maxlength")
                             }
                         })}
                         type="password" 
-                        placeholder={t("changepassword.current.placeholder")}
+                        placeholder={t("password.current.placeholder")}
                     />
                 </div>
 
                 <div className="profile-inputs">
-                    <label>{t("changepassword.new.label")}</label>
+                    <label>{t("password.new.label")}</label>
                     <input
-                        {...register("newp", {
-                            required: t("changepassword.new.required"),
+                        {...register("newPassword", {
+                            required: t("password.new.required"),
                             maxLength: {
                                 value: 100, 
-                                message: t("changepassword.new.maxlength")
+                                message: t("password.new.maxlength")
                             }
                         })} 
                         type="password" 
-                        placeholder={t("changepassword.new.placeholder")}
+                        placeholder={t("password.new.placeholder")}
                     />
                 </div>
 
                 <div className="profile-inputs">
-                    <label>{t("changepassword.confirm.label")}</label>
+                    <label>{t("password.confirm.label")}</label>
                     <input
-                        {...register("confirmp", {
-                            required: t("changepassword.confirm.required"),
+                        {...register("confirmPassword", {
+                            required: t("password.confirm.required"),
                             maxLength: {
                                 value: 100, 
-                                message: t("changepassword.confirm.maxlength")
+                                message: t("password.confirm.max-length")
                             }
                         })}  
                         type="password"
-                        placeholder={t("changepassword.confirm.placeholder")}
+                        placeholder={t("password.confirm.placeholder")}
                     />
                 </div>
             </div>
             
-            <button type='submit'>{t("changepassword.update")}</button>
+            <button type='submit'>{t("password.update")}</button>
         </form>
     );
 }

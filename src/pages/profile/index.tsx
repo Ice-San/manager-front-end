@@ -77,7 +77,7 @@ export const ProfilePage = () => {
                     
                     <button className="profile-save-btn" form='profile-form' type='submit'>
                         <Icon className='save-icon-size' url='/img/save-icon.png' />
-                        {t("savechanges")}
+                        {t("save")}
                     </button>
 
                     <SelectLanguage />
@@ -112,17 +112,17 @@ export const ProfilePage = () => {
                         </div>
 
                         <div className="profile-basic-information">
-                            <h2>{t("basicinfo.title")}</h2>
+                            <h2>{t("info.title")}</h2>
 
                             <div className="profile-basic-information-row">
                                 <div className="profile-inputs">
-                                    <label>{t("basicinfo.fullname.title")}</label>
+                                    <label>{t("info.fullname.title")}</label>
                                     <input 
                                         {...register("username", {
-                                            required: t("basicinfo.fullname.required"),
+                                            required: t("info.fullname.required"),
                                             maxLength: {
                                                 value: 100, 
-                                                message: t("basicinfo.fullname.maxlength")
+                                                message: t("info.fullname.max-length")
                                             }
                                         })} 
                                         type="text" 
@@ -131,17 +131,17 @@ export const ProfilePage = () => {
                                 </div>
 
                                 <div className="profile-inputs">
-                                    <label>{t("basicinfo.email.title")}</label>
+                                    <label>{t("info.email.title")}</label>
                                     <input 
                                         {...register("email", {
-                                            required: t("basicinfo.email.required"),
+                                            required: t("info.email.required"),
                                             pattern: {
                                                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i, 
-                                                message: t("basicinfo.email.pattern")
+                                                message: t("info.email.pattern")
                                             },
                                             maxLength: {
                                                 value: 100, 
-                                                message: t("basicinfo.email.maxlength")
+                                                message: t("info.email.max-length")
                                             } 
                                         })}
                                         type="text" 
@@ -152,17 +152,17 @@ export const ProfilePage = () => {
 
                             <div className="profile-basic-information-row">
                                 <div className="profile-inputs">
-                                    <label>{t("basicinfo.phoneNumber.title")}</label>
+                                    <label>{t("info.phoneNumber.title")}</label>
                                     <input 
                                         {...register("phone", {
-                                            required: t("basicinfo.phoneNumber.required"),
+                                            required: t("info.phone-number.required"),
                                             pattern: {
                                                 value: /^\+?[0-9]{1,4}([ -]?\(?[0-9]{1,5}\)?)*([ -]?[0-9]{2,15})+$/, 
-                                                message: t("basicinfo.phoneNumber.pattern")
+                                                message: t("info.phone-number.pattern")
                                             },
                                             maxLength: {
                                                 value: 30, 
-                                                message: t("basicinfo.phone.maxlength")
+                                                message: t("info.phone-number.max-length")
                                             } 
                                         })}
                                         type="tel" 
@@ -173,9 +173,9 @@ export const ProfilePage = () => {
                                 <div className="profile-inputs">
                                     <label>{t("top.role.title")}</label>
                                     <select {...register("role")}>
-                                        <option defaultValue="Admins">{t("top.role.admin")}</option>
-                                        <option defaultValue="Moderator">{t("top.role.moderator")}</option>
-                                        <option defaultValue="User">{t("top.role.user")}</option>
+                                        <option defaultValue="admin">{t("top.role.admin")}</option>
+                                        <option defaultValue="moderator">{t("top.role.moderator")}</option>
+                                        <option defaultValue="user">{t("top.role.user")}</option>
                                     </select>
                                 </div>
                             </div>
@@ -184,15 +184,15 @@ export const ProfilePage = () => {
                         <div className="horizontal-line"></div>
 
                         <div className="profile-additional-details">
-                            <h2>{t("additionaldetails.title")}</h2>
+                            <h2>{t("details.title")}</h2>
 
                             <div className="profile-inputs">
-                                <label>{t("additionaldetails.address.title")}</label>
+                                <label>{t("details.address.title")}</label>
                                 <input 
                                     {...register("address", {
                                         maxLength: {
                                             value: 255, 
-                                            message: t("additionaldetails.adress.maxlength")
+                                            message: t("details.address.max-length")
                                         } 
                                     })}
                                     type="text" 
@@ -201,16 +201,16 @@ export const ProfilePage = () => {
                             </div>
 
                             <div className="profile-inputs">
-                                <label>{t("additionaldetails.bio.title")}</label>
+                                <label>{t("details.biography.title")}</label>
                                 <textarea
                                     {...register("bio", {
                                         maxLength: {
                                             value: 255, 
-                                            message: t("additionaldetails.bio.maxlength")
+                                            message: t("details.biography.max-length")
                                         } 
                                     })} 
                                     rows={3} 
-                                    placeholder={t("additionaldetails.bioPlaceholder")}
+                                    placeholder={t("details.biography.placeholder")}
                                 >
                                     Senior administrator with 5+ years of experience in user management and system administration.
                                 </textarea>
@@ -237,14 +237,14 @@ export const ProfilePage = () => {
 
                         <div className="profile-danger-conteiner">
                             <div className="profile-danger-left">
-                                <h4>{t("dangerzone.deleteAccount.title")}</h4>
-                                <p>{t("dangerzone.deleteAccount.subtitle")}</p>
+                                <h4>{t("dangerzone.delete.title")}</h4>
+                                <p>{t("dangerzone.delete.subtitle")}</p>
                             </div>
 
                             <div className="profile-danger-right">
                                 <div className="profile-danger-btn">
                                     <Icon className='danger-icon-size' url='/img/delete-white-icon.png' />
-                                    <p>{t("dangerzone.deleteAccount.button")}</p>
+                                    <p>{t("dangerzone.delete.button")}</p>
                                 </div>
                             </div>
                         </div>

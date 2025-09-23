@@ -1,8 +1,7 @@
 {
   "back": "Back to Users",
-  "savechanges": "Save Changes",
+  "save": "Save Changes",
   "lastlogin": "Last login",
-  
   "top": {
     "role": {
       "title": "Role",
@@ -16,72 +15,67 @@
       "inactive": "Inactive"
     }
   },
-
   "userinfo": {
     "title": "User Information",
     "subtitle": "View user profile and account details"
   },
-
-  "basicinfo": {
+  "info": {
     "title": "BASIC INFORMATION",
     "fullname": {
       "title": "Full Name",
       "required": "You need to put an username!",
-      "maxlength": "The username can't have more than 100 characters!"
+      "max-length": "The username can't have more than 100 characters!"
     },
     "email": {
       "title": "Email Address",
       "required": "You need to put an email!",
       "pattern": "The email isn't valid!",
-      "maxlength": "The email can't have more than 100 characters!"
+      "max-length": "The email can't have more than 100 characters!"
     },
-    "phoneNumber": {
+    "phone-number": {
       "title": "Phone Number",
       "required": "You need to put an phone number!",
       "pattern": "The phone number isn't valid!",
-      "maxlength": "The phone number can't have more than 30 characters!"
+      "max-length": "The phone number can't have more than 30 characters!"
     }
   },
-
-  "additionaldetails": {
+  "details": {
     "title": "ADDITIONAL DETAILS",
     "address": {
       "title": "Address",
-      "maxlength": "The adress can't have more than 255 characters!"
+      "max-length": "The adress can't have more than 255 characters!"
     },
-    "bio": {
+    "biography": {
       "title": "Bio",
-      "maxlength": "The bio can't have more than 255 characters!"
-    },
-    "bioPlaceholder": "Enter Bio"
+      "max-length": "The bio can't have more than 255 characters!",
+      "placeholder": "Enter Bio"
+    }
   },
-
-  "changepassword": {
+  "password": {
     "title": "CHANGE PASSWORD",
     "current": {
       "label": "Current Password",
       "required": "You need to put your current password!",
-      "maxlength": "The email can't have more than 100 characters!",
+      "max-length": "The email can't have more than 100 characters!",
       "placeholder": "Enter current password"
     },
     "new": {
       "label": "New Password",
       "required": "You need to put your new password!",
-      "maxlength": "The email can't have more than 100 characters!",
+      "max-length": "The email can't have more than 100 characters!",
       "placeholder": "Enter new password"
     },
     "confirm": {
       "label": "Confirm Password",
       "required": "You need to confirm your new password!",
-      "maxlength": "The email can't have more than 100 characters!",
+      "max-length": "The email can't have more than 100 characters!",
       "placeholder": "Enter new password"
     },
     "update": "Update Password"
   },
-
   "dangerzone": {
     "title": "DANGER ZONE",
-    "deleteAccount": {
+    "delete": {
       "title": "Delete User Account",
       "subtitle": "This action cannot be undone. This will permanently delete the user account.",
       "button": "Delete User"

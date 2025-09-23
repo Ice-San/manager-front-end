@@ -1,6 +1,7 @@
 {
     "title": "Manager",
     "subtitle": "Manage your users efficiently with add, remove, and search functionality.",
+    "logout": "SignUp",
     "adduser": {
         "title": "Add New User",
         "subtitle": "Fill in the details to add a new user to the system."

@@ -1,8 +1,7 @@
 {
   "back": "Voltar para Utilizadores",
-  "savechanges": "Guardar Alterações",
+  "save": "Guardar Alterações",
   "lastlogin": "Último login",
-  
   "top": {
     "role": {
       "title": "Função",
@@ -16,72 +15,67 @@
       "inactive": "Inativa"
     }
   },
-
   "userinfo": {
     "title": "Informações do Utilizador",
     "subtitle": "Ver perfil do utilizador e detalhes da conta"
   },
-
-  "basicinfo": {
+  "info": {
     "title": "INFORMAÇÃO BÁSICA",
     "fullname": {
       "title": "Nome Completo",
       "required": "Precisa de inserir um nome de utilizador!",
-      "maxlength": "O nome de utilizador não pode ter mais de 100 caracteres!"
+      "max-length": "O nome de utilizador não pode ter mais de 100 caracteres!"
     },
     "email": {
       "title": "Endereço de Email",
       "required": "Precisa de inserir um email!",
       "pattern": "O email não é válido!",
-      "maxlength": "O email não pode ter mais de 100 caracteres!"
+      "max-length": "O email não pode ter mais de 100 caracteres!"
     },
-    "phoneNumber": {
+    "phone-number": {
       "title": "Número de Telefone",
       "required": "Precisa de inserir um número de telefone!",
       "pattern": "O número de telefone não é válido!",
-      "maxlength": "O número de telefone não pode ter mais de 30 caracteres!"
+      "max-length": "O número de telefone não pode ter mais de 30 caracteres!"
     }
   },
-
-  "additionaldetails": {
+  "details": {
     "title": "DETALHES ADICIONAIS",
     "address": {
       "title": "Endereço",
-      "maxlength": "O endereço não pode ter mais de 255 caracteres!"
+      "max-length": "O endereço não pode ter mais de 255 caracteres!"
     },
-    "bio": {
+    "biography": {
       "title": "Biografia",
-      "maxlength": "A biografia não pode ter mais de 255 caracteres!"
-    },
-    "bioPlaceholder": "Inserir Biografia"
+      "max-length": "A biografia não pode ter mais de 255 caracteres!",
+      "placeholder": "Inserir Biografia"
+    }
   },
-
-  "changepassword": {
+  "password": {
     "title": "ALTERAR PALAVRA-PASSE",
     "current": {
       "label": "Palavra-Passe Atual",
       "required": "Precisa de inserir a sua palavra-passe atual!",
-      "maxlength": "A palavra-passe não pode ter mais de 100 caracteres!",
+      "max-length": "A palavra-passe não pode ter mais de 100 caracteres!",
       "placeholder": "Insira a palavra-passe atual"
     },
     "new": {
       "label": "Nova Palavra-Passe",
       "required": "Precisa de inserir a nova palavra-passe!",
-      "maxlength": "A palavra-passe não pode ter mais de 100 caracteres!",
+      "max-length": "A palavra-passe não pode ter mais de 100 caracteres!",
       "placeholder": "Insira a nova palavra-passe"
     },
     "confirm": {
       "label": "Confirmar Palavra-Passe",
       "required": "Precisa de confirmar a nova palavra-passe!",
-      "maxlength": "A palavra-passe não pode ter mais de 100 caracteres!",
+      "max-length": "A palavra-passe não pode ter mais de 100 caracteres!",
       "placeholder": "Insira novamente a nova palavra-passe"
     },
     "update": "Atualizar Palavra-Passe"
   },
-
   "dangerzone": {
     "title": "ZONA DE PERIGO",
-    "deleteAccount": {
+    "delete": {
       "title": "Eliminar Conta de Utilizador",
       "subtitle": "Esta ação não pode ser desfeita. Isto irá eliminar permanentemente a conta do utilizador.",
       "button": "Eliminar Utilizador"

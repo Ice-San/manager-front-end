@@ -23,6 +23,43 @@
     color: oklch(55.6% 0 0);
 }
 
+.dashboard-right-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.logout {
+    background-color: #fff;
+    border: 1px solid #d1d5dc;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 8px 20px;
+
+    transition: all ease-in-out 0.15s;
+}
+
+.logout:hover {
+    transform: scale(0.9);
+}
+
+.logout-icon {
+    width: 15px;
+    height: 15px;
+}
+
+.logout > p {
+    font-weight: 500;
+}
+
 .dashboard-users {
     display: flex;
     gap: calc(.25rem * 6);
