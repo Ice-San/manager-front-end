@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm,  } from 'react-hook-form';
 import { useTranslation } from "react-i18next";
 
 type ChangePasswordType = {
@@ -8,8 +8,12 @@ type ChangePasswordType = {
 }
 
 export const ChangePassword = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<ChangePasswordType>();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<ChangePasswordType>();
     const { t } = useTranslation("profile");
+
+    const currentPasswordInput = watch("currentPassword");
+    const newPasswordInput = watch("newPassword");
+    const confirmPasswordInput = watch("confirmPassword");
 
     const handleAdd = ({currentPassword, newPassword, confirmPassword}: ChangePasswordType) => {
         console.log(currentPassword);
@@ -72,7 +76,7 @@ export const ChangePassword = () => {
                 </div>
             </div>
             
-            <button type='submit'>{t("password.update")}</button>
+            <button type='submit' disabled={!currentPasswordInput || !newPasswordInput || !confirmPasswordInput} >{t("password.update")}</button>
         </form>
     );
 }

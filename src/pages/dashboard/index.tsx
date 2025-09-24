@@ -29,7 +29,7 @@ type Form = {
 export const DashboardPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<Form>();
     const navegate = useNavigate();
-    const [cookies, removeCookie] = useCookies(['token']);
+    const [cookies, _, removeCookie] = useCookies(['token']);
     const { t } = useTranslation("dashboard");
 
     const [ users, setUsers ] = useState<User[]>(usersData);
@@ -71,7 +71,7 @@ export const DashboardPage = () => {
     }
 
     const handleSignOut = () => {
-        removeCookie("token", { path: '/' });
+        removeCookie("token");
     }
 
     useEffect(() => {

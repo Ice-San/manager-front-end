@@ -419,10 +419,8 @@
 }
 
 .profile-password > button {
-    opacity: .5;
-    outline: none;
-
     cursor: pointer;
+    outline: none;
 
     background-color: #171717;
     border-radius: 8px;
@@ -445,6 +443,11 @@
     height: 32px;
 
     transition: all cubic-bezier(.4, 0, .2, 1) .15s;
+}
+
+.profile-password > button:disabled {
+    cursor: default;
+    opacity: .5;
 }
 
 .profile-danger-zone > h2 {

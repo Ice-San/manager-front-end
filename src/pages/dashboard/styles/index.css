@@ -186,6 +186,8 @@
     white-space: nowrap;
     line-height: calc(1.25 / .875);
 
+    cursor: pointer;
+
     background-color: oklab(20.5% 0 0);
     border-radius: calc(.625rem - 2px);
     outline-style: none;
@@ -204,6 +206,10 @@
     height: calc(.25rem * 9);
 
     transition: all cubic-bezier(.4,0,.2,1) .15s;
+}
+
+.dashboard-add-btn:hover {
+    background-color: oklab(18.5% 0 0);
 }
 
 .dashboard-add-icon-btn {

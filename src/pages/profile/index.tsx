@@ -219,8 +219,8 @@ export const ProfilePage = () => {
                             <div className="profile-inputs">
                                 <label>{t("top.status.title")}</label>
                                 <select {...register("status")}>
-                                    <option defaultValue="Active">{t("top.status.active")}</option>
-                                    <option defaultValue="Inactive">{t("top.status.inactive")}</option>
+                                    <option defaultValue="active">{t("top.status.active")}</option>
+                                    <option defaultValue="inactive">{t("top.status.inactive")}</option>
                                 </select>
                             </div>
                         </div>
