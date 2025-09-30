@@ -26,6 +26,8 @@ type Form = {
     role: string
 }
 
+const { VITE_API_ENDPOINT } = import.meta.env;
+
 export const DashboardPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<Form>();
     const navegate = useNavigate();
@@ -35,7 +37,7 @@ export const DashboardPage = () => {
     const [ users, setUsers ] = useState<User[]>(usersData);
     const [ stats, setStats ] = useState(statsData);
 
-    const handleAdd = ({username, role, email}: Form) => {
+    const handleAdd = async ({username, role, email}: Form) => {
         if (users.find(user => user.email === email)) {
             toast.warning("A user with that email already exists!", {
                 position: "top-left",
@@ -45,18 +47,49 @@ export const DashboardPage = () => {
             return;
         }
 
-        const date = new Date();
-        const id = (users.at(-1)?.id || 0) + 1;
-        const user = {
-            id,
-            username,
-            role: role.toLowerCase(),
-            state: "active",
-            email,
-            joined: `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
-        }
+        try {
+            const token = cookies?.token;
+            const response = await fetch(`${VITE_API_ENDPOINT}/users/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({token, username, email, role})
+            });
+            const { data, status } = await response.json();
+            const { success } = data;
 
-        setUsers(prev => [...prev, user]);
+            if(status !== 201 || !success) {
+                console.error("User Creation was failed...");
+                toast.error('User Creation was failed...', {
+                    position: "top-left",
+                    pauseOnHover: false,
+                    draggable: 'touch'
+                });
+                return;
+            }
+
+            const date = new Date();
+            const id = (users.at(-1)?.id || 0) + 1;
+            const user = {
+                id,
+                username,
+                email,
+                role,
+                state: "active",
+                joined: `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+            }
+
+            setUsers(prev => [...prev, user]);
+
+            toast.success(`User ${username} was created!`, {
+                position: "top-left",
+                pauseOnHover: false,
+                draggable: 'touch'
+            });
+        } catch(err) {
+            console.error("Something went wrong: ", err);
+        }
     }
 
     const handleError = (err: any) => {
@@ -158,9 +191,9 @@ export const DashboardPage = () => {
                             <div className="dashboard-add-form-inputs">
                                 <label>{ t("role.title") }</label>
                                 <select {...register('role')}>
-                                    <option>{t("role.user")}</option>
-                                    <option>{t("role.moderator")}</option>
-                                    <option>{t("role.admin")}</option>
+                                    <option value='user'>{t("role.user")}</option>
+                                    <option value='moderator'>{t("role.moderator")}</option>
+                                    <option value='admin'>{t("role.admin")}</option>
                                 </select>
                             </div>
 

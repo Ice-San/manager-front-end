@@ -31,7 +31,7 @@ export const SignInPage = () => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(dataForm)
-            })
+            });
             const { data, status } = await response.json();
             const { success, token } = data;
     

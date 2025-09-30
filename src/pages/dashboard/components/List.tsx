@@ -49,9 +49,8 @@ export const List = ({ users, setUsers, stats }: List) => {
 
                     <div className="dashboard-list-users">
                         {users.filter(user => match(user.username, input)).map(user => (
-                            <Link className="dashboard-list-user" to='/profile'>
+                            <Link key={user.id} className="dashboard-list-user" to='/profile'>
                                 <UserItems
-                                    key={user.id}
                                     {...user}
                                     onDelete={handleDelete}
                                 />
