@@ -46,7 +46,7 @@ export const DashboardPage = () => {
         const token = cookies?.token;
 
         (async () => {
-            const response = await fetch(`${VITE_API_ENDPOINT}/users/`, {
+            const response = await fetch(`${VITE_API_ENDPOINT}/users?max=4`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
