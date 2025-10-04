@@ -46,7 +46,7 @@ export const DashboardPage = () => {
         const token = cookies?.token;
 
         (async () => {
-            const response = await fetch(`${VITE_API_ENDPOINT}/users?max=4`, {
+            const response = await fetch(`${VITE_API_ENDPOINT}/users?max=3`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export const DashboardPage = () => {
 
             setUsers(data);
         })();
-    }, [users]);
+    }, []);
 
     useEffect(() => {
         setStats({

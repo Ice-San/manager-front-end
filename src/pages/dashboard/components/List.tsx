@@ -48,13 +48,21 @@ export const List = ({ users, setUsers, stats }: List) => {
                     </div>
 
                     <div className="dashboard-list-users">
-                        {users.filter(user => match(user.username, input)).map(user => (
-                            <Link key={user.email} className="dashboard-list-user" to='/profile'>
-                                <UserItems
-                                    {...user}
-                                    onDelete={handleDelete}
-                                />
-                            </Link>
+                        {users
+                            .filter(user => match(user.username, input))
+                            .reverse()
+                            .map(user => (
+                                <div className="dashboard-list-user-parent">
+                                    <Link key={user.email} className="dashboard-list-user" to='/profile'>
+                                        <UserItems
+                                            {...user}
+                                        />
+                                    </Link>
+
+                                    <button className="dashboard-list-item-delete" onClick={() => handleDelete(user.email)}>
+                                        <Icon className="dashboard-list-item-delete-icon" url="/img/delete.png" />
+                                    </button>
+                                </div>
                         ))}
                     </div>
                 </div>
