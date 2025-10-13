@@ -1,5 +1,3 @@
-import { Icon } from "./Icon";
-
 import { getInitials } from "@utils/getInitials";
 import { formatDate } from "@utils/formatDate";
 

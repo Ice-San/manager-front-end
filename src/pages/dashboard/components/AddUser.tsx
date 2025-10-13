@@ -7,12 +7,13 @@ import { useTranslation } from "react-i18next";
 import { Icon } from '@components/Icon';
 
 import { User } from "types/user";
+
 import { getTodayDate } from "@utils/getTodayDate";
+import { formatDate } from "@utils/formatDate";
 
 const { VITE_API_ENDPOINT } = import.meta.env;
 
 type AddUserType = {
-    users: User[],
     setUsers: Dispatch<SetStateAction<User[]>>
 }
 
@@ -22,21 +23,16 @@ type Form = {
     role: string
 }
 
-export const AddUser = ({ users, setUsers }: AddUserType) => {
+type ReactivateUserType = {
+    email: string
+}
+
+export const AddUser = ({ setUsers }: AddUserType) => {
     const { register, handleSubmit, formState: { errors } } = useForm<Form>();
     const [cookies] = useCookies(['token']);
     const { t } = useTranslation("dashboard");
 
     const handleAdd = async ({username, role, email}: Form) => {
-        if (users.find(user => user.email === email)) {
-            toast.warning("A user with that email already exists!", {
-                position: "top-left",
-                pauseOnHover: false,
-                draggable: 'touch'
-            });
-            return;
-        }
-
         try {
             const token = cookies?.token;
             const response = await fetch(`${VITE_API_ENDPOINT}/users/`, {
@@ -49,6 +45,13 @@ export const AddUser = ({ users, setUsers }: AddUserType) => {
             });
             const { data, status } = await response.json();
             const { success } = data;
+
+            if(status === 409) {
+                if(confirm("User Already exists! Do you wanna reactivate that user account?")) {
+                    handleReactivateUser({email});
+                }
+                return;
+            }
 
             if(status !== 201 || !success) {
                 console.error("User Creation was failed...");
@@ -63,9 +66,9 @@ export const AddUser = ({ users, setUsers }: AddUserType) => {
             const user = {
                 username,
                 email,
-                role,
-                state: "active",
-                joined: getTodayDate()
+                user_type: role,
+                status: "active",
+                account_created_at: getTodayDate()
             }
 
             setUsers(prev => [...prev, user]);
@@ -76,6 +79,50 @@ export const AddUser = ({ users, setUsers }: AddUserType) => {
                 draggable: 'touch'
             });
         } catch(err) {
+            console.error("Something went wrong: ", err);
+        }
+    }
+
+    const handleReactivateUser = async ({email}: ReactivateUserType) => {
+        try {
+            const token = cookies?.token;
+            const response = await fetch(`${VITE_API_ENDPOINT}/users/reactivate/`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({email})
+            });
+            const { status, data } = await response.json();
+            const { username, user_type, joined } = data;
+
+            if(status !== 200) {
+                console.error("User Reactivation was failed...");
+                toast.error('User Reactivation was failed...', {
+                    position: "top-left",
+                    pauseOnHover: false,
+                    draggable: 'touch'
+                });
+                return;
+            }
+
+            const user = {
+                username,
+                email,
+                user_type,
+                status: "active",
+                account_created_at: getTodayDate()
+            }
+
+            setUsers(prev => [...prev, user]);
+
+            toast.success(`User ${username} was reactivated!`, {
+                position: "top-left",
+                pauseOnHover: false,
+                draggable: 'touch'
+            });
+        } catch (err) {
             console.error("Something went wrong: ", err);
         }
     }

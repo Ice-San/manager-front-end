@@ -1,7 +1,7 @@
 export type User = {
     username: string;
-    role: string;
-    state: string;
+    user_type: string;
+    status: string;
     email: string;
-    joined: string;
+    account_created_at: string;
 }

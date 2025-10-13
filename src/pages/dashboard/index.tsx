@@ -72,9 +72,9 @@ export const DashboardPage = () => {
     useEffect(() => {
         setStats({
             totalUsers: users.length,
-            admins: users.filter(user => user.role === "admin").length,
-            moderators: users.filter(user => user.role === "moderator").length,
-            users: users.filter(user => user.role === "user").length
+            admins: users.filter(user => user.user_type === "admin").length,
+            moderators: users.filter(user => user.user_type === "moderator").length,
+            users: users.filter(user => user.user_type === "user").length
         });
     }, [users])
 
@@ -109,7 +109,7 @@ export const DashboardPage = () => {
                         </div>
                     </div>
 
-                    <AddUser users={users} setUsers={setUsers} />
+                    <AddUser setUsers={setUsers} />
                 </div>
 
                 <List users={users} setUsers={setUsers} stats={stats} />

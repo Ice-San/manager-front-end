@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { Link } from "react-router";
+import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
 import { Icon } from "@components/Icon";
@@ -9,6 +11,8 @@ import { match } from "@utils/match";
 
 import { User } from "types/user";
 
+const { VITE_API_ENDPOINT } = import.meta.env;
+
 type List = {
     users: any[],
     setUsers: Dispatch<SetStateAction<User[]>>,
@@ -17,9 +21,35 @@ type List = {
 
 export const List = ({ users, setUsers, stats }: List) => {
     const [ input, setInput ] = useState('');
+    const [cookies] = useCookies(['token']);
     const { t } = useTranslation("dashboard");
 
-    const handleDelete = (email: string) => {
+    const handleDelete = async (email: string) => {
+        try {
+            const token = cookies?.token;
+            const response = await fetch(`${VITE_API_ENDPOINT}/users/`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({email})
+            });
+            const { status } = await response.json();
+
+            if(status !== 200) {
+                console.error("User Reactivation was failed...");
+                toast.error('User Reactivation was failed...', {
+                    position: "top-left",
+                    pauseOnHover: false,
+                    draggable: 'touch'
+                });
+                return;
+            }
+        } catch (err) {
+            console.error("Something went wrong: ", err);
+        }
+
         setUsers(prevUser => prevUser.filter(user => user.email !== email));
     }
 
@@ -52,8 +82,8 @@ export const List = ({ users, setUsers, stats }: List) => {
                             .filter(user => match(user.username, input))
                             .reverse()
                             .map(user => (
-                                <div className="dashboard-list-user-parent">
-                                    <Link key={user.email} className="dashboard-list-user" to='/profile'>
+                                <div key={user.email} className="dashboard-list-user-parent">
+                                    <Link className="dashboard-list-user" to='/profile'>
                                         <UserItems
                                             {...user}
                                         />
