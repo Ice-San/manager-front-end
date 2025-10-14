@@ -32,10 +32,10 @@ export const DashboardPage = () => {
     const handleSignOut = () => {
         removeCookie("token");
     }
-
+    
+    const token = cookies?.token;
+    
     useEffect(() => {
-        const token = cookies?.token;
-
         (async () => {
             const auth = await validation(token as string);
             if(!auth) navegate('/');
@@ -43,8 +43,6 @@ export const DashboardPage = () => {
     },[]);
 
     useEffect(() => {
-        const token = cookies?.token;
-
         (async () => {
             const response = await fetch(`${VITE_API_ENDPOINT}/users?max=3`, {
                 method: "GET",
@@ -70,12 +68,34 @@ export const DashboardPage = () => {
     }, []);
 
     useEffect(() => {
-        setStats({
-            totalUsers: users.length,
-            admins: users.filter(user => user.user_type === "admin").length,
-            moderators: users.filter(user => user.user_type === "moderator").length,
-            users: users.filter(user => user.user_type === "user").length
-        });
+        (async () => {
+            const response = await fetch(`${VITE_API_ENDPOINT}/kpi/`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            const { data, status } = await response.json();
+            const { total_users, admins, mods, users } = data;
+
+            if (status !== 200) {
+                console.error("KPIs not found!");
+                toast.error('KPIs not found!', {
+                    position: "top-left",
+                    pauseOnHover: false,
+                    draggable: 'touch'
+                });
+                return;
+            }
+
+            setStats({
+                total_users,
+                admins,
+                mods,
+                users
+            });
+        })();
     }, [users])
 
     return (
@@ -119,7 +139,7 @@ export const DashboardPage = () => {
                 <Stats 
                     icon='dashboard-total-icon'
                     title={ t("totalusers") }
-                    value={stats.totalUsers}
+                    value={stats.total_users}
                 />
                 <Stats 
                     icon=''
@@ -129,7 +149,7 @@ export const DashboardPage = () => {
                 <Stats 
                     icon=''
                     title={ t("moderators") }
-                    value={stats.moderators}
+                    value={stats.mods}
                 />
                 <Stats 
                     icon=''
