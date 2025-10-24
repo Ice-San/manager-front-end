@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router';
+import { useEffect, useState } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { useCookies } from 'react-cookie';
 import { useTranslation } from 'react-i18next';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { Icon } from '@components/Icon';
 import { SelectLanguage } from '@components/SelectLanguage';
@@ -14,6 +15,8 @@ import { getTodayDate } from '@utils/getTodayDate';
 import '@styles/index.css';
 import './styles/index.css';
 import './styles/media-querys.css';
+import { getInitials } from '@utils/getInitials';
+import { formatDate } from '@utils/formatDate';
 
 type ProfileFormType = {
     username: string,
@@ -25,9 +28,29 @@ type ProfileFormType = {
     status: string
 }
 
+const userData = {
+    first_name: '',
+    last_name: '',
+    username: '',
+    email: '',
+    address: '',
+    phone_number: '',
+    bio: '',
+    user_type: '',
+    status: '',
+    account_created_at: ''
+}
+
+const { VITE_API_ENDPOINT } = import.meta.env;
+
 export const ProfilePage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ProfileFormType>();
+    const [ user, setUser ] = useState(userData);
+
     const navegate = useNavigate();
+    const location = useLocation();
+    const { email } = location.state;
+
     const [cookies] = useCookies(['token']);
     const { t } = useTranslation("profile");
 
@@ -45,14 +68,58 @@ export const ProfilePage = () => {
         console.log(err);
     }
 
-    useEffect(() => {
-        const token = cookies?.token;
+    const token = cookies?.token;
 
+    useEffect(() => {
         (async () => {
             const auth = await validation(token as string);
             if(!auth) navegate('/');
         })();
-    },[]);
+
+        if(!email) navegate('/');
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await fetch(`${VITE_API_ENDPOINT}/users/details`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({email})
+                });
+                const { data, status } = await response.json();
+
+                if(status !== 200) {
+                    console.error("Getting Details was failed...");
+                    toast.error('Getting Details was failed...', {
+                        position: "top-left",
+                        pauseOnHover: false,
+                        draggable: 'touch'
+                    });
+                    return;
+                }
+
+                setUser(data);
+            } catch (err) {
+                console.error("Something went wrong: ", err);
+            }
+        })();
+    }, [])
+
+    const { 
+        first_name,
+        last_name,
+        username,
+        address,
+        phone_number,
+        bio,
+        user_type,
+        status,
+        account_created_at
+     } = user;
 
     return (
         <div className="profile">
@@ -66,14 +133,14 @@ export const ProfilePage = () => {
                     </Link>
 
                     <div className="profile-top-info">
-                        <h1>John Doe</h1>
-                        <p>john.doe@example.com</p>
+                        <h1>{first_name + " " + last_name}</h1>
+                        <p>{email}</p>
                     </div>
                 </div>
 
                 <div className="profile-top-right">
-                    <p data-role="User">{t("top.role.admin")}</p>
-                    <p data-state="Active">{t("top.status.active")}</p>
+                    <p data-role="User">{t(`top.role.${user_type}`)}</p>
+                    <p data-state="Active">{t(`top.status.${status}`)}</p>
                     
                     <button className="profile-save-btn" form='profile-form' type='submit'>
                         <Icon className='save-icon-size' url='/img/save-icon.png' />
@@ -90,13 +157,13 @@ export const ProfilePage = () => {
                         <div className="profile-left-content-space">
                             <div className="profile-left-content-info">
                                 <div className="profile-icon">
-                                    <p>JD</p>
+                                    <p>{getInitials(first_name + " " + last_name)}</p>
                                 </div>
 
                                 <div className="profile-text">
-                                    <h2>John Doe</h2>
+                                    <h2>{first_name + " " + last_name}</h2>
                                     <p>Member since</p>
-                                    <p>{getTodayDate()}</p>
+                                    <p>{formatDate(account_created_at)}</p>
                                     <p>{t("lastlogin") + ": " + getTodayDate()}</p>
                                 </div>
                             </div>
@@ -126,7 +193,7 @@ export const ProfilePage = () => {
                                             }
                                         })} 
                                         type="text" 
-                                        defaultValue="John Doe" 
+                                        defaultValue={username}
                                     />
                                 </div>
 
@@ -145,14 +212,14 @@ export const ProfilePage = () => {
                                             } 
                                         })}
                                         type="text" 
-                                        defaultValue="john.doe@example.com"
+                                        defaultValue={email}
                                     />
                                 </div>
                             </div>
 
                             <div className="profile-basic-information-row">
                                 <div className="profile-inputs">
-                                    <label>{t("info.phoneNumber.title")}</label>
+                                    <label>{t("info.phone-number.title")}</label>
                                     <input 
                                         {...register("phone", {
                                             required: t("info.phone-number.required"),
@@ -166,7 +233,7 @@ export const ProfilePage = () => {
                                             } 
                                         })}
                                         type="tel" 
-                                        defaultValue='+1 (555) 123-4567' 
+                                        defaultValue={phone_number} 
                                     />
                                 </div>
 
@@ -196,7 +263,7 @@ export const ProfilePage = () => {
                                         } 
                                     })}
                                     type="text" 
-                                    defaultValue='123 Main St, New York, NY 10001' 
+                                    defaultValue={address} 
                                 />
                             </div>
 
@@ -212,7 +279,7 @@ export const ProfilePage = () => {
                                     rows={3} 
                                     placeholder={t("details.biography.placeholder")}
                                 >
-                                    Senior administrator with 5+ years of experience in user management and system administration.
+                                    {bio}
                                 </textarea>
                             </div>
 
@@ -251,6 +318,8 @@ export const ProfilePage = () => {
                     </div>
                 </div>
             </div>
+
+            <ToastContainer />
         </div>
     );
 };

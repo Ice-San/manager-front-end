@@ -28,6 +28,7 @@ export const DashboardPage = () => {
 
     const [ users, setUsers ] = useState<User[]>([]);
     const [ stats, setStats ] = useState(statsData);
+    const [ activeUsers, setActiveUsers ] = useState(0);
 
     const handleSignOut = () => {
         removeCookie("token");
@@ -129,10 +130,10 @@ export const DashboardPage = () => {
                         </div>
                     </div>
 
-                    <AddUser setUsers={setUsers} />
+                    <AddUser setUsers={setUsers} setActiveUsers={setActiveUsers} />
                 </div>
 
-                <List users={users} setUsers={setUsers} stats={stats} />
+                <List users={users} setUsers={setUsers} activeUsers={activeUsers} setActiveUsers={setActiveUsers} />
             </div>
 
             <div className="dashboard-stats">

@@ -14,7 +14,8 @@ import { formatDate } from "@utils/formatDate";
 const { VITE_API_ENDPOINT } = import.meta.env;
 
 type AddUserType = {
-    setUsers: Dispatch<SetStateAction<User[]>>
+    setUsers: Dispatch<SetStateAction<User[]>>,
+    setActiveUsers: Dispatch<SetStateAction<number>>
 }
 
 type Form = {
@@ -27,7 +28,7 @@ type ReactivateUserType = {
     email: string
 }
 
-export const AddUser = ({ setUsers }: AddUserType) => {
+export const AddUser = ({ setUsers, setActiveUsers }: AddUserType) => {
     const { register, handleSubmit, formState: { errors } } = useForm<Form>();
     const [cookies] = useCookies(['token']);
     const { t } = useTranslation("dashboard");
@@ -72,6 +73,7 @@ export const AddUser = ({ setUsers }: AddUserType) => {
             }
 
             setUsers(prev => [...prev, user]);
+            setActiveUsers(prev => prev + 1);
 
             toast.success(`User ${username} was created!`, {
                 position: "top-left",
@@ -116,6 +118,7 @@ export const AddUser = ({ setUsers }: AddUserType) => {
             }
 
             setUsers(prev => [...prev, user]);
+            setActiveUsers(prev => prev + 1);
 
             toast.success(`User ${username} was reactivated!`, {
                 position: "top-left",
