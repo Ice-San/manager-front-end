@@ -109,9 +109,7 @@ export const ProfilePage = () => {
         })();
     }, [])
 
-    const { 
-        first_name,
-        last_name,
+    const {
         username,
         address,
         phone_number,
@@ -133,7 +131,7 @@ export const ProfilePage = () => {
                     </Link>
 
                     <div className="profile-top-info">
-                        <h1>{first_name + " " + last_name}</h1>
+                        <h1>{username}</h1>
                         <p>{email}</p>
                     </div>
                 </div>
@@ -157,11 +155,11 @@ export const ProfilePage = () => {
                         <div className="profile-left-content-space">
                             <div className="profile-left-content-info">
                                 <div className="profile-icon">
-                                    <p>{getInitials(first_name + " " + last_name)}</p>
+                                    <p>{getInitials(username)}</p>
                                 </div>
 
                                 <div className="profile-text">
-                                    <h2>{first_name + " " + last_name}</h2>
+                                    <h2>{username}</h2>
                                     <p>Member since</p>
                                     <p>{formatDate(account_created_at)}</p>
                                     <p>{t("lastlogin") + ": " + getTodayDate()}</p>
@@ -278,8 +276,8 @@ export const ProfilePage = () => {
                                     })} 
                                     rows={3} 
                                     placeholder={t("details.biography.placeholder")}
+                                    value={bio}
                                 >
-                                    {bio}
                                 </textarea>
                             </div>
 

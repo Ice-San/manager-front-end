@@ -140,7 +140,7 @@ export const DashboardPage = () => {
                 <Stats 
                     icon='dashboard-total-icon'
                     title={ t("totalusers") }
-                    value={stats.total_users}
+                    value={activeUsers}
                 />
                 <Stats 
                     icon=''
