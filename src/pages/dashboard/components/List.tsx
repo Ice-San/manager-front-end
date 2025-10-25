@@ -10,17 +10,18 @@ import { UserItems } from "@components/UserItem";
 import { match } from "@utils/match";
 
 import { User } from "types/user";
+import { StatsType } from "types/stats";
 
 const { VITE_API_ENDPOINT } = import.meta.env;
 
 type List = {
     users: any[],
     setUsers: Dispatch<SetStateAction<User[]>>,
-    activeUsers: number,
-    setActiveUsers: Dispatch<SetStateAction<number>>,
+    stats: StatsType,
+    setStats: Dispatch<SetStateAction<StatsType>>
 }
 
-export const List = ({ users, setUsers, activeUsers, setActiveUsers }: List) => {
+export const List = ({ users, setUsers, stats, setStats }: List) => {
     const [ input, setInput ] = useState('');
     const [cookies] = useCookies(['token']);
     const { t } = useTranslation("dashboard");
@@ -53,37 +54,7 @@ export const List = ({ users, setUsers, activeUsers, setActiveUsers }: List) => 
         }
 
         setUsers(prevUser => prevUser.filter(user => user.email !== email));
-        setActiveUsers(prevValue => prevValue - 1);
     }
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const response = await fetch(`${VITE_API_ENDPOINT}/kpi/active`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                });
-                const { status, data } = await response.json();
-
-                if(status !== 200) {
-                    console.error("User Reactivation was failed...");
-                    toast.error('User Reactivation was failed...', {
-                        position: "top-left",
-                        pauseOnHover: false,
-                        draggable: 'touch'
-                    });
-                    return;
-                }
-
-                setActiveUsers(data.total_users)
-            } catch(err) {
-                console.error("Something went wrong: ", err);
-            }
-        })()
-    }, [])
 
     return (
         <>
@@ -91,7 +62,7 @@ export const List = ({ users, setUsers, activeUsers, setActiveUsers }: List) => 
                 <div className="dashboard-list-title">
                     <div className="dashboard-list-title-top">
                         <Icon className="dashboard-list-icon" url='/img/user-list-black.png' />
-                        <h2>{t("userlist.title")} ({activeUsers})</h2>
+                        <h2>{t("userlist.title")} ({stats.total_users})</h2>
                     </div>
                 
                     <div className="dashboard-list-title-bottom">

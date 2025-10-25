@@ -11,7 +11,7 @@
         "id": 2,
         "username": "Jane Smith",
         "role": "user",
-        "state": "active",
+        "state": "inactive",
         "email": "jane.smith@example.com",
         "joined": "2/20/2024"
     },

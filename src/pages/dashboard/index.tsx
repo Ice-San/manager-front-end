@@ -28,7 +28,6 @@ export const DashboardPage = () => {
 
     const [ users, setUsers ] = useState<User[]>([]);
     const [ stats, setStats ] = useState(statsData);
-    const [ activeUsers, setActiveUsers ] = useState(0);
 
     const handleSignOut = () => {
         removeCookie("token");
@@ -70,7 +69,7 @@ export const DashboardPage = () => {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(`${VITE_API_ENDPOINT}/kpi/`, {
+            const response = await fetch(`${VITE_API_ENDPOINT}/kpi/active`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -130,17 +129,17 @@ export const DashboardPage = () => {
                         </div>
                     </div>
 
-                    <AddUser setUsers={setUsers} setActiveUsers={setActiveUsers} />
+                    <AddUser setUsers={setUsers} />
                 </div>
 
-                <List users={users} setUsers={setUsers} activeUsers={activeUsers} setActiveUsers={setActiveUsers} />
+                <List users={users} setUsers={setUsers} stats={stats} setStats={setStats} />
             </div>
 
             <div className="dashboard-stats">
                 <Stats 
                     icon='dashboard-total-icon'
                     title={ t("totalusers") }
-                    value={activeUsers}
+                    value={stats.total_users}
                 />
                 <Stats 
                     icon=''
