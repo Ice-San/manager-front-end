@@ -83,7 +83,6 @@ export const List = ({ users, setUsers, stats, setStats }: List) => {
                     <div className="dashboard-list-users">
                         {users
                             .filter(user => match(user.username, input))
-                            .reverse()
                             .map(user => (
                                 <div key={user.email} className="dashboard-list-user-parent">
                                     <Link className="dashboard-list-user" to='/profile' state={{ email: user.email }}>
