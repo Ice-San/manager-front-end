@@ -1,5 +1,7 @@
+import { useCookies } from 'react-cookie';
 import { useForm,  } from 'react-hook-form';
 import { useTranslation } from "react-i18next";
+import { toast } from 'react-toastify';
 
 type ChangePasswordType = {
     currentPassword: string,
@@ -7,18 +9,60 @@ type ChangePasswordType = {
     confirmPassword: string
 }
 
-export const ChangePassword = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<ChangePasswordType>();
+type EmailType = {
+    email: string
+}
+
+const { VITE_API_ENDPOINT } = import.meta.env;
+
+export const ChangePassword = ({email}: EmailType) => {
     const { t } = useTranslation("profile");
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<ChangePasswordType>();
+    const [cookies] = useCookies(['token']);
 
     const currentPasswordInput = watch("currentPassword");
     const newPasswordInput = watch("newPassword");
     const confirmPasswordInput = watch("confirmPassword");
 
-    const handleAdd = ({currentPassword, newPassword, confirmPassword}: ChangePasswordType) => {
-        console.log(currentPassword);
-        console.log(newPassword);
-        console.log(confirmPassword);
+    const handleUpdate = async ({currentPassword, newPassword, confirmPassword}: ChangePasswordType) => {
+        if(currentPassword !== confirmPassword) {
+            toast.error('Passwords doesn\'t match!', {
+                position: "top-left",
+                pauseOnHover: false,
+                draggable: 'touch'
+            });
+            return;
+        }
+
+        try {
+            const response = await fetch(`${VITE_API_ENDPOINT}/users/password`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${cookies?.token}`
+                },
+                body: JSON.stringify({email, newPassword})
+            });
+            const { status } = await response.json();
+
+            if(status !== 200) {
+                console.error("Updating Password was failed...");
+                toast.error('Updating Details was failed...', {
+                    position: "top-left",
+                    pauseOnHover: false,
+                    draggable: 'touch'
+                });
+                return;
+            }
+
+            toast.success('Updating Password worked successfully!', {
+                position: "top-left",
+                pauseOnHover: false,
+                draggable: 'touch'
+            });
+        } catch (err) {
+            console.error("Something went wrong: ", err);
+        }
     }
 
     const handleError = (err: any) => {
@@ -26,7 +70,7 @@ export const ChangePassword = () => {
     }
 
     return (
-        <form className="profile-password" onSubmit={handleSubmit(handleAdd, handleError)}>
+        <form className="profile-password" onSubmit={handleSubmit(handleUpdate, handleError)}>
             <h2>{t("password.title")}</h2>
 
             <div className="profile-basic-information-row">

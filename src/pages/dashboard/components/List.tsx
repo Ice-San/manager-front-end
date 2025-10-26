@@ -62,7 +62,7 @@ export const List = ({ users, setUsers, stats, setStats }: List) => {
                 <div className="dashboard-list-title">
                     <div className="dashboard-list-title-top">
                         <Icon className="dashboard-list-icon" url='/img/user-list-black.png' />
-                        <h2>{t("userlist.title")} ({stats.total_users})</h2>
+                        <h2>{t("userlist.title")} ({stats.total})</h2>
                     </div>
                 
                     <div className="dashboard-list-title-bottom">

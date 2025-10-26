@@ -19,9 +19,9 @@ import { getInitials } from '@utils/getInitials';
 import { formatDate } from '@utils/formatDate';
 
 type ProfileFormType = {
-    username: string,
+    full_name: string,
     email: string,
-    phone: string,
+    phone_number: string,
     role: string,
     address: string,
     bio: string,
@@ -32,33 +32,70 @@ const { VITE_API_ENDPOINT } = import.meta.env;
 
 export const ProfilePage = () => {
     const { t } = useTranslation("profile");
-    const { register, handleSubmit, formState: { errors } } = useForm<ProfileFormType>();
+    const { register, handleSubmit, setValue, getValues, formState: { errors } } = useForm<ProfileFormType>({
+        defaultValues: {
+            full_name: '',
+            email: '',
+            address: '',
+            phone_number: '',
+            bio: '',
+            role: 'admin',
+            status: 'active'
+        }
+    });
     const [cookies] = useCookies(['token']);
     const navegate = useNavigate();
     const location = useLocation();
     const { email } = location.state;
 
-    const [ user, setUser ] = useState({
-        first_name: '',
-        last_name: '',
-        username: '',
-        email: '',
-        address: '',
-        phone_number: '',
-        bio: '',
-        user_type: '',
-        status: '',
-        account_created_at: ''
-    });
+    const [ createAtLabel, setCreateAtLabel ] = useState('');
 
-    const handleUpdate = ({username, email, phone, role, address, bio, status}: ProfileFormType) => {
-        console.log(username);
-        console.log(email);
-        console.log(phone);
-        console.log(role);
-        console.log(address);
-        console.log(bio);
-        console.log(status);
+    const handleUpdate = async (user: ProfileFormType) => {
+        try {
+            const response = await fetch(`${VITE_API_ENDPOINT}/users/`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${cookies?.token}`
+                },
+                body: JSON.stringify({
+                    username: user.full_name, 
+                    email: user.email,
+                    address: user.address,
+                    phone: user.phone_number,
+                    bio: user.bio,
+                    role: user.role,  
+                    userStatus: user.status,
+                })
+            });
+            const { status } = await response.json();
+
+            if(status !== 200) {
+                console.error("Updating Details was failed...");
+                toast.error('Updating Details was failed...', {
+                    position: "top-left",
+                    pauseOnHover: false,
+                    draggable: 'touch'
+                });
+                return;
+            }
+
+            setValue("full_name", user.full_name);
+            setValue("email", email);
+            setValue("phone_number", user.phone_number);
+            setValue("bio", user.bio);
+            setValue("address", user.address);
+            setValue("role", user.role);
+            setValue("status", user.status);
+
+            toast.success('Updating Details worked successfully!', {
+                position: "top-left",
+                pauseOnHover: false,
+                draggable: 'touch'
+            });
+        } catch (err) {
+            console.error("Something went wrong: ", err);
+        }
     }
 
     const handleError = (err: any) => {
@@ -97,12 +134,20 @@ export const ProfilePage = () => {
                     return;
                 }
 
-                setUser(data);
+                setValue("full_name", data.username);
+                setValue("email", data.email);
+                setValue("phone_number", data.phone_number);
+                setValue("bio", data.bio);
+                setValue("address", data.address);
+                setValue("role", data.user_type);
+                setValue("status", data.status);
+                
+                setCreateAtLabel(data.account_created_at);
             } catch (err) {
                 console.error("Something went wrong: ", err);
             }
         })();
-    }, [])
+    }, []);
 
     return (
         <div className="profile">
@@ -116,14 +161,14 @@ export const ProfilePage = () => {
                     </Link>
 
                     <div className="profile-top-info">
-                        <h1>{user.username}</h1>
-                        <p>{email}</p>
+                        <h1>{getValues("full_name")}</h1>
+                        <p>{getValues("email")}</p>
                     </div>
                 </div>
 
                 <div className="profile-top-right">
-                    <p data-role="User">{t(`top.role.${user.user_type}`)}</p>
-                    <p data-state="Active">{t(`top.status.${user.status}`)}</p>
+                    <p data-role="User">{t(`top.role.${getValues("role")}`)}</p>
+                    <p data-state="Active">{t(`top.status.${getValues("status")}`)}</p>
                     
                     <button className="profile-save-btn" form='profile-form' type='submit'>
                         <Icon className='save-icon-size' url='/img/save-icon.png' />
@@ -140,13 +185,13 @@ export const ProfilePage = () => {
                         <div className="profile-left-content-space">
                             <div className="profile-left-content-info">
                                 <div className="profile-icon">
-                                    <p>{getInitials(user.username)}</p>
+                                    <p>{getInitials(getValues("full_name"))}</p>
                                 </div>
 
                                 <div className="profile-text">
-                                    <h2>{user.username}</h2>
+                                    <h2>{getValues("full_name")}</h2>
                                     <p>Member since</p>
-                                    <p>{formatDate(user.account_created_at)}</p>
+                                    <p>{formatDate(createAtLabel)}</p>
                                     <p>{t("lastlogin") + ": " + getTodayDate()}</p>
                                 </div>
                             </div>
@@ -168,15 +213,14 @@ export const ProfilePage = () => {
                                 <div className="profile-inputs">
                                     <label>{t("info.fullname.title")}</label>
                                     <input 
-                                        {...register("username", {
+                                        {...register("full_name", {
                                             required: t("info.fullname.required"),
                                             maxLength: {
                                                 value: 100, 
                                                 message: t("info.fullname.max-length")
                                             }
                                         })} 
-                                        type="text" 
-                                        defaultValue={user.username}
+                                        type="text"
                                     />
                                 </div>
 
@@ -194,8 +238,8 @@ export const ProfilePage = () => {
                                                 message: t("info.email.max-length")
                                             } 
                                         })}
-                                        type="text" 
-                                        defaultValue={email}
+                                        type="text"
+                                        disabled={true}
                                     />
                                 </div>
                             </div>
@@ -204,8 +248,7 @@ export const ProfilePage = () => {
                                 <div className="profile-inputs">
                                     <label>{t("info.phone-number.title")}</label>
                                     <input 
-                                        {...register("phone", {
-                                            required: t("info.phone-number.required"),
+                                        {...register("phone_number", {
                                             pattern: {
                                                 value: /^\+?[0-9]{1,4}([ -]?\(?[0-9]{1,5}\)?)*([ -]?[0-9]{2,15})+$/, 
                                                 message: t("info.phone-number.pattern")
@@ -215,17 +258,16 @@ export const ProfilePage = () => {
                                                 message: t("info.phone-number.max-length")
                                             } 
                                         })}
-                                        type="tel" 
-                                        defaultValue={user.phone_number} 
+                                        type="tel"
                                     />
                                 </div>
 
                                 <div className="profile-inputs">
                                     <label>{t("top.role.title")}</label>
                                     <select {...register("role")}>
-                                        <option defaultValue="admin">{t("top.role.admin")}</option>
-                                        <option defaultValue="moderator">{t("top.role.moderator")}</option>
-                                        <option defaultValue="user">{t("top.role.user")}</option>
+                                        <option value="admin">{t("top.role.admin")}</option>
+                                        <option value="moderator">{t("top.role.moderator")}</option>
+                                        <option value="user">{t("top.role.user")}</option>
                                     </select>
                                 </div>
                             </div>
@@ -245,8 +287,7 @@ export const ProfilePage = () => {
                                             message: t("details.address.max-length")
                                         } 
                                     })}
-                                    type="text" 
-                                    defaultValue={user.address} 
+                                    type="text"
                                 />
                             </div>
 
@@ -261,16 +302,14 @@ export const ProfilePage = () => {
                                     })} 
                                     rows={3} 
                                     placeholder={t("details.biography.placeholder")}
-                                    value={user.bio}
-                                >
-                                </textarea>
+                                />
                             </div>
 
                             <div className="profile-inputs">
                                 <label>{t("top.status.title")}</label>
                                 <select {...register("status")}>
-                                    <option defaultValue="active">{t("top.status.active")}</option>
-                                    <option defaultValue="inactive">{t("top.status.inactive")}</option>
+                                    <option value="active">{t("top.status.active")}</option>
+                                    <option value="inactive">{t("top.status.inactive")}</option>
                                 </select>
                             </div>
                         </div>
@@ -278,7 +317,7 @@ export const ProfilePage = () => {
 
                     <div className="horizontal-line"></div>
 
-                    <ChangePassword />
+                    <ChangePassword email={email} />
 
                     <div className="horizontal-line"></div>
 
