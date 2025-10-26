@@ -28,33 +28,30 @@ type ProfileFormType = {
     status: string
 }
 
-const userData = {
-    first_name: '',
-    last_name: '',
-    username: '',
-    email: '',
-    address: '',
-    phone_number: '',
-    bio: '',
-    user_type: '',
-    status: '',
-    account_created_at: ''
-}
-
 const { VITE_API_ENDPOINT } = import.meta.env;
 
 export const ProfilePage = () => {
+    const { t } = useTranslation("profile");
     const { register, handleSubmit, formState: { errors } } = useForm<ProfileFormType>();
-    const [ user, setUser ] = useState(userData);
-
+    const [cookies] = useCookies(['token']);
     const navegate = useNavigate();
     const location = useLocation();
     const { email } = location.state;
 
-    const [cookies] = useCookies(['token']);
-    const { t } = useTranslation("profile");
+    const [ user, setUser ] = useState({
+        first_name: '',
+        last_name: '',
+        username: '',
+        email: '',
+        address: '',
+        phone_number: '',
+        bio: '',
+        user_type: '',
+        status: '',
+        account_created_at: ''
+    });
 
-    const handleAdd = ({username, email, phone, role, address, bio, status}: ProfileFormType) => {
+    const handleUpdate = ({username, email, phone, role, address, bio, status}: ProfileFormType) => {
         console.log(username);
         console.log(email);
         console.log(phone);
@@ -68,11 +65,9 @@ export const ProfilePage = () => {
         console.log(err);
     }
 
-    const token = cookies?.token;
-
     useEffect(() => {
         (async () => {
-            const auth = await validation(token as string);
+            const auth = await validation(cookies?.token as string);
             if(!auth) navegate('/');
         })();
 
@@ -86,7 +81,7 @@ export const ProfilePage = () => {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
+                        "Authorization": `Bearer ${cookies?.token}`
                     },
                     body: JSON.stringify({email})
                 });
@@ -109,16 +104,6 @@ export const ProfilePage = () => {
         })();
     }, [])
 
-    const {
-        username,
-        address,
-        phone_number,
-        bio,
-        user_type,
-        status,
-        account_created_at
-     } = user;
-
     return (
         <div className="profile">
             <div className="profile-top">
@@ -131,14 +116,14 @@ export const ProfilePage = () => {
                     </Link>
 
                     <div className="profile-top-info">
-                        <h1>{username}</h1>
+                        <h1>{user.username}</h1>
                         <p>{email}</p>
                     </div>
                 </div>
 
                 <div className="profile-top-right">
-                    <p data-role="User">{t(`top.role.${user_type}`)}</p>
-                    <p data-state="Active">{t(`top.status.${status}`)}</p>
+                    <p data-role="User">{t(`top.role.${user.user_type}`)}</p>
+                    <p data-state="Active">{t(`top.status.${user.status}`)}</p>
                     
                     <button className="profile-save-btn" form='profile-form' type='submit'>
                         <Icon className='save-icon-size' url='/img/save-icon.png' />
@@ -155,13 +140,13 @@ export const ProfilePage = () => {
                         <div className="profile-left-content-space">
                             <div className="profile-left-content-info">
                                 <div className="profile-icon">
-                                    <p>{getInitials(username)}</p>
+                                    <p>{getInitials(user.username)}</p>
                                 </div>
 
                                 <div className="profile-text">
-                                    <h2>{username}</h2>
+                                    <h2>{user.username}</h2>
                                     <p>Member since</p>
-                                    <p>{formatDate(account_created_at)}</p>
+                                    <p>{formatDate(user.account_created_at)}</p>
                                     <p>{t("lastlogin") + ": " + getTodayDate()}</p>
                                 </div>
                             </div>
@@ -170,7 +155,7 @@ export const ProfilePage = () => {
                 </div>
                 
                 <div className="profile-right-content">
-                    <form id='profile-form' onSubmit={handleSubmit(handleAdd, handleError)}>
+                    <form id='profile-form' onSubmit={handleSubmit(handleUpdate, handleError)}>
                         <div className="profile-right-content-title">
                             <h2>{t("userinfo.title")}</h2>
                             <p>{t("userinfo.subtitle")}</p>
@@ -191,7 +176,7 @@ export const ProfilePage = () => {
                                             }
                                         })} 
                                         type="text" 
-                                        defaultValue={username}
+                                        defaultValue={user.username}
                                     />
                                 </div>
 
@@ -231,7 +216,7 @@ export const ProfilePage = () => {
                                             } 
                                         })}
                                         type="tel" 
-                                        defaultValue={phone_number} 
+                                        defaultValue={user.phone_number} 
                                     />
                                 </div>
 
@@ -261,7 +246,7 @@ export const ProfilePage = () => {
                                         } 
                                     })}
                                     type="text" 
-                                    defaultValue={address} 
+                                    defaultValue={user.address} 
                                 />
                             </div>
 
@@ -276,7 +261,7 @@ export const ProfilePage = () => {
                                     })} 
                                     rows={3} 
                                     placeholder={t("details.biography.placeholder")}
-                                    value={bio}
+                                    value={user.bio}
                                 >
                                 </textarea>
                             </div>

@@ -1,6 +1,6 @@
 export type StatsType = {
-    total_users: number;
+    total: number;
     admins: number;
-    mods: number;
+    moderators: number;
     users: number;
 }

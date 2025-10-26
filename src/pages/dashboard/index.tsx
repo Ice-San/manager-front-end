@@ -77,7 +77,7 @@ export const DashboardPage = () => {
                 }
             });
             const { data, status } = await response.json();
-            const { total_users, admins, mods, users } = data;
+            const { total, admins, moderators, users } = data;
 
             if (status !== 200) {
                 console.error("KPIs not found!");
@@ -90,9 +90,9 @@ export const DashboardPage = () => {
             }
 
             setStats({
-                total_users,
+                total,
                 admins,
-                mods,
+                moderators,
                 users
             });
         })();
@@ -139,7 +139,7 @@ export const DashboardPage = () => {
                 <Stats 
                     icon='dashboard-total-icon'
                     title={ t("totalusers") }
-                    value={stats.total_users}
+                    value={stats.total}
                 />
                 <Stats 
                     icon=''
@@ -149,7 +149,7 @@ export const DashboardPage = () => {
                 <Stats 
                     icon=''
                     title={ t("moderators") }
-                    value={stats.mods}
+                    value={stats.moderators}
                 />
                 <Stats 
                     icon=''
