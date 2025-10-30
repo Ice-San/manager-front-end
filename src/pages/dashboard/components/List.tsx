@@ -83,17 +83,26 @@ export const List = ({ users, setUsers, stats, setStats }: List) => {
                     <div className="dashboard-list-users">
                         {users
                             .filter(user => match(user.username, input))
-                            .map(user => (
+                            .map((user, index, arr) => (
                                 <div key={user.email} className="dashboard-list-user-parent">
-                                    <Link className="dashboard-list-user" to='/profile' state={{ email: user.email }}>
+                                    {index === arr.length - 1 ? (
                                         <UserItems
                                             {...user}
                                         />
-                                    </Link>
+                                    ) : (
+                                        <>
+                                            <Link className="dashboard-list-user" to='/profile' state={{ email: user.email }}>
+                                                <UserItems
+                                                    {...user}
+                                                    clickable="clickable"
+                                                />
+                                            </Link>
 
-                                    <button className="dashboard-list-item-delete" onClick={() => handleDelete(user.email)}>
-                                        <Icon className="dashboard-list-item-delete-icon" url="/img/delete.png" />
-                                    </button>
+                                            <button className="dashboard-list-item-delete" onClick={() => handleDelete(user.email)}>
+                                                <Icon className="dashboard-list-item-delete-icon" url="/img/delete.png" />
+                                            </button>
+                                        </>
+                                    )}
                                 </div>
                         ))}
                     </div>

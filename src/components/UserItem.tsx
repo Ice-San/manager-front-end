@@ -7,12 +7,13 @@ type UserItemsType = {
     status: string,
     email: string,
     account_created_at: string,
+    clickable?: string
 }
 
-export const UserItems = ({username, user_type, status, email, account_created_at}: UserItemsType) => {
+export const UserItems = ({username, user_type, status, email, account_created_at, clickable}: UserItemsType) => {
     return (
         <>
-            <div className="dashboard-list-item">
+            <div className={`dashboard-list-item ${clickable}`}>
                 <div className="dashboard-list-item-top">
                     <span>
                         <span>{getInitials(username?.toCapitalize())}</span>
