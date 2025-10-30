@@ -132,7 +132,7 @@ export const DashboardPage = () => {
                     <AddUser setUsers={setUsers} />
                 </div>
 
-                <List users={users} setUsers={setUsers} stats={stats} setStats={setStats} />
+                <List users={users} setUsers={setUsers} stats={stats} />
             </div>
 
             <div className="dashboard-stats">

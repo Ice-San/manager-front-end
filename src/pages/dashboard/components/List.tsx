@@ -17,11 +17,10 @@ const { VITE_API_ENDPOINT } = import.meta.env;
 type List = {
     users: any[],
     setUsers: Dispatch<SetStateAction<User[]>>,
-    stats: StatsType,
-    setStats: Dispatch<SetStateAction<StatsType>>
+    stats: StatsType
 }
 
-export const List = ({ users, setUsers, stats, setStats }: List) => {
+export const List = ({ users, setUsers, stats }: List) => {
     const [ input, setInput ] = useState('');
     const [cookies] = useCookies(['token']);
     const { t } = useTranslation("dashboard");

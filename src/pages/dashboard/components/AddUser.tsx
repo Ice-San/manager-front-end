@@ -70,7 +70,11 @@ export const AddUser = ({ setUsers }: AddUserType) => {
                 account_created_at: getTodayDate()
             }
 
-            setUsers(prev => [...prev, user]);
+            setUsers(prev => {
+                const newUsers = [...prev];
+                newUsers.splice(prev.length - 1, 0, user);
+                return newUsers;
+            });
 
             toast.success(`User ${username} was created!`, {
                 position: "top-left",
@@ -114,7 +118,11 @@ export const AddUser = ({ setUsers }: AddUserType) => {
                 account_created_at: getTodayDate()
             }
 
-            setUsers(prev => [...prev, user]);
+            setUsers(prev => {
+                const newUsers = [...prev];
+                newUsers.splice(prev.length - 1, 0, user);
+                return newUsers;
+            });
 
             toast.success(`User ${username} was reactivated!`, {
                 position: "top-left",
