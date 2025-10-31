@@ -139,21 +139,25 @@ export const DashboardPage = () => {
                 <Stats 
                     icon='dashboard-total-icon'
                     title={ t("totalusers") }
+                    span='Total Users'
                     value={stats.total}
                 />
                 <Stats 
                     icon=''
                     title={ t("admins") }
+                    span='Admins'
                     value={stats.admins}
                 />
                 <Stats 
                     icon=''
                     title={ t("moderators") }
+                    span='Moderators'
                     value={stats.moderators}
                 />
                 <Stats 
                     icon=''
                     title={ t("users") }
+                    span='Users'
                     value={stats.users}
                 />
             </div>
