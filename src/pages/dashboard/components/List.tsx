@@ -87,6 +87,7 @@ export const List = ({ users, setUsers, stats }: List) => {
                                     {index === arr.length - 1 ? (
                                         <UserItems
                                             {...user}
+                                            borderColor='dashboard-list-item-unselectable'
                                         />
                                     ) : (
                                         <>

@@ -8,12 +8,13 @@ type UserItemsType = {
     email: string,
     account_created_at: string,
     clickable?: string
+    borderColor?: string
 }
 
-export const UserItems = ({username, user_type, status, email, account_created_at, clickable}: UserItemsType) => {
+export const UserItems = ({username, user_type, status, email, account_created_at, clickable, borderColor}: UserItemsType) => {
     return (
         <>
-            <div className={`dashboard-list-item ${clickable}`}>
+            <div className={`dashboard-list-item ${clickable || ''} ${borderColor || ''}`}>
                 <div className="dashboard-list-item-top">
                     <span>
                         <span>{getInitials(username?.toCapitalize())}</span>

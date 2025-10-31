@@ -328,6 +328,10 @@
     transition-duration: .15s;
 }
 
+.dashboard-list-item-unselectable {
+    border: #00000080 solid 1px;
+}
+
 .dashboard-list-user-parent {
     position: relative;
 }
